@@ -1,0 +1,2465 @@
+/* =========================================================
+   MI PERSONAJE
+   Perfil personal RPG / Gremio
+   ========================================================= */
+/* =========================================================
+   BASE
+   ========================================================= */
+html {
+    scroll-behavior: smooth;
+}
+body {
+    margin: 0;
+}
+.mi-personaje {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #160c06;
+    color: #f1ddb2;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+/* =========================================================
+   FONDO
+   ========================================================= */
+.mi-personaje-fondo {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            rgba(28, 14, 6, 0.32),
+            rgba(18, 8, 3, 0.64)
+        ),
+        url("/recursos/imagenes/madera.png");
+    background-size: cover;
+    background-position: center;
+    filter:
+        saturate(0.84)
+        brightness(0.9);
+}
+.mi-luz-ambiente {
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
+    top: -170px;
+    left: 50%;
+    width: 950px;
+    height: 780px;
+    transform:
+        translateX(-50%);
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(211, 143, 58, 0.18) 0%,
+            rgba(173, 101, 31, 0.08) 38%,
+            transparent 70%
+        );
+    filter: blur(12px);
+}
+/* =========================================================
+   VOLVER A LA TABERNA
+   ========================================================= */
+.mi-volver {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    padding: 11px 19px;
+    border:
+        1px solid #765020;
+    border-radius: 6px;
+    background:
+        rgba(49, 27, 11, 0.93);
+    color: #e4c47f;
+    font:
+        bold 15px Georgia,
+        "Times New Roman",
+        serif;
+    cursor: pointer;
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.48);
+    transition:
+        background 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease;
+}
+.mi-volver:hover {
+    background: #4d2d12;
+    border-color: #9b6d2e;
+    color: #ffe1a0;
+}
+/* =========================================================
+   NAVEGADOR LATERAL
+   ========================================================= */
+.mi-navegador-lateral {
+    position: fixed;
+    z-index: 90;
+    top: 50%;
+    right: 18px;
+    transform:
+        translateY(-50%);
+    width: 72px;
+    min-height: 128px;
+    padding: 15px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border:
+        1px solid #76501f;
+    border-right:
+        3px solid #9b6a28;
+    border-radius:
+        9px 3px 3px 9px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(73, 42, 16, 0.96),
+            rgba(43, 23, 9, 0.97)
+        );
+    color: #e0bd73;
+    box-shadow:
+        -5px 7px 20px
+        rgba(0, 0, 0, 0.42),
+        inset 1px 1px
+        rgba(255, 219, 145, 0.07);
+    cursor: pointer;
+    transition:
+        width 190ms ease,
+        background 190ms ease,
+        border-color 190ms ease,
+        color 190ms ease,
+        box-shadow 190ms ease;
+}
+.mi-navegador-lateral:hover {
+    width: 96px;
+    background:
+        linear-gradient(
+            135deg,
+            #65401b,
+            #42240e
+        );
+    border-color: #a87532;
+    color: #f1d28b;
+    box-shadow:
+        -7px 8px 24px
+        rgba(0, 0, 0, 0.48),
+        inset 1px 1px
+        rgba(255, 224, 157, 0.10);
+}
+.mi-nav-flecha {
+    display: block;
+    font-size: 31px;
+    line-height: 1;
+    transition:
+        transform 280ms ease;
+}
+.mi-nav-texto {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.mi-navegador-arriba
+.mi-nav-flecha {
+    transform: rotate(180deg);
+}
+/* =========================================================
+   HERO
+   ========================================================= */
+.mi-hero {
+    position: relative;
+    z-index: 3;
+    width:
+        min(1050px, 92%);
+    min-height: 100vh;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding:
+        52px 0 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+/* =========================================================
+   IDENTIDAD
+   ========================================================= */
+.mi-encabezado {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+}
+.mi-encabezado > span {
+    color: #b58b4d;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+.mi-encabezado h1 {
+    margin:
+        7px 0 0;
+    color: #f1d28c;
+    font-size:
+        clamp(44px, 5vw, 68px);
+    line-height: 1;
+    text-shadow:
+        0 4px 12px #0009;
+}
+.mi-encabezado p {
+    margin:
+        8px 0 0;
+    color: #c2a16d;
+    font-size: 17px;
+    line-height: 1.4;
+}
+.mi-vista-etiqueta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    color: #9b825e;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+.mi-vista-etiqueta span {
+    width: 30px;
+    height: 1px;
+    background: #75532a;
+}
+/* =========================================================
+   ESCENA DEL PERSONAJE
+   ========================================================= */
+.mi-personaje-escena {
+    position: relative;
+    width:
+        min(880px, 100%);
+    height: 410px;
+    margin-top: 0;
+}
+.mi-resplandor {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform:
+        translateX(-50%);
+    width: 510px;
+    height: 390px;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(209, 135, 49, 0.17),
+            rgba(167, 93, 27, 0.05) 45%,
+            transparent 70%
+        );
+    filter: blur(7px);
+}
+.mi-sombra-suelo {
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform:
+        translateX(-50%);
+    width: 300px;
+    height: 35px;
+    border-radius: 50%;
+    background:
+        rgba(0, 0, 0, 0.34);
+    filter: blur(11px);
+}
+.mi-kaiser {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform:
+        translateX(-50%);
+    height:
+        min(435px, 56vh);
+    max-width: 58%;
+    object-fit: contain;
+    object-position:
+        bottom center;
+    filter:
+        drop-shadow(
+            0 16px 18px
+            rgba(0, 0, 0, 0.65)
+        );
+}
+/* =========================================================
+   BURBUJA DE DIÁLOGO
+   ========================================================= */
+.mi-burbuja {
+    position: absolute;
+    top: 70px;
+    left: 67%;
+    width:
+        min(360px, 34vw);
+    box-sizing: border-box;
+    padding:
+        18px 22px;
+    border:
+        1px solid #8d6229;
+    border-radius: 8px;
+    background:
+        linear-gradient(
+            180deg,
+            #ead096,
+            #cda561
+        );
+    color: #311c0b;
+    box-shadow:
+        0 8px 20px
+        rgba(0, 0, 0, 0.42),
+        inset 0 1px
+        rgba(255, 242, 204, 0.65);
+    animation:
+        mi-frase-aparece
+        180ms
+        ease-out;
+}
+.mi-burbuja::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    bottom: 25px;
+    border-top:
+        9px solid transparent;
+    border-bottom:
+        9px solid transparent;
+    border-right:
+        14px solid #cda561;
+}
+.mi-burbuja-nombre {
+    margin-bottom: 7px;
+    color: #714718;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+.mi-burbuja-texto {
+    color: #2c1808;
+    font-size: 17px;
+    line-height: 1.55;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+@keyframes mi-frase-aparece {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* =========================================================
+   AHORA MISMO
+   ========================================================= */
+.mi-estado-principal {
+    position: relative;
+    z-index: 5;
+    width:
+        min(560px, 90%);
+    box-sizing: border-box;
+    padding:
+        13px 18px;
+    display: grid;
+    grid-template-columns:
+        auto 1fr auto;
+    align-items: center;
+    gap: 15px;
+    border-top:
+        1px solid #765326;
+    border-bottom:
+        1px solid #765326;
+    color: #d5bd8b;
+}
+.mi-estado-principal span {
+    color: #ad8952;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.8px;
+}
+.mi-estado-principal strong {
+    overflow: hidden;
+    color: #e0cda4;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1.4;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mi-estado-principal button {
+    padding:
+        6px 9px;
+    border: none;
+    background: transparent;
+    color: #e0ac50;
+    font:
+        bold 13px Georgia,
+        "Times New Roman",
+        serif;
+    cursor: pointer;
+    transition:
+        color 140ms ease;
+}
+.mi-estado-principal button:hover {
+    color: #ffd47d;
+}
+/* =========================================================
+   ACCIONES PRINCIPALES
+   ========================================================= */
+.mi-acciones-principales {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    margin-top: 20px;
+}
+.mi-decir-principal {
+    padding:
+        12px 27px;
+    border:
+        1px solid #a06d2d;
+    border-radius: 6px;
+    background:
+        linear-gradient(
+            #b97828,
+            #744313
+        );
+    color: #ffe1a2;
+    font:
+        bold 16px Georgia,
+        "Times New Roman",
+        serif;
+    cursor: pointer;
+    box-shadow:
+        0 5px 13px
+        rgba(0, 0, 0, 0.38);
+    transition:
+        filter 150ms ease,
+        border-color 150ms ease,
+        box-shadow 150ms ease;
+}
+.mi-decir-principal:hover {
+    filter: brightness(1.09);
+    border-color: #c58c3b;
+    box-shadow:
+        0 5px 16px
+        rgba(0, 0, 0, 0.46);
+}
+.mi-ver-como {
+    padding:
+        7px 11px;
+    border: none;
+    background: transparent;
+    color: #b8a07b;
+    font:
+        14px Georgia,
+        "Times New Roman",
+        serif;
+    cursor: pointer;
+    transition:
+        color 150ms ease;
+}
+.mi-ver-como span {
+    margin-right: 4px;
+}
+.mi-ver-como:hover {
+    color: #e4c17b;
+}
+/* =========================================================
+   ZONA INFERIOR
+   ========================================================= */
+.mi-zona-inferior {
+    position: relative;
+    z-index: 3;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding:
+        18px 0 80px;
+    scroll-margin-top: 0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(18, 8, 3, 0.05),
+            rgba(17, 8, 3, 0.32) 18%,
+            rgba(13, 6, 3, 0.48)
+        );
+}
+.mi-transicion-zona {
+    width:
+        min(700px, 75%);
+    margin:
+        0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mi-transicion-zona div {
+    width: 100%;
+    height: 1px;
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #745024,
+            transparent
+        );
+}
+/* =========================================================
+   CABECERA "LO MÍO"
+   ========================================================= */
+.mi-lo-mio-cabecera {
+    margin-bottom: 32px;
+    text-align: center;
+}
+.mi-lo-mio-cabecera > span {
+    color: #a17f50;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+.mi-lo-mio-cabecera h2 {
+    margin:
+        6px 0 7px;
+    color: #e6c47e;
+    font-size: 32px;
+    font-weight: normal;
+    line-height: 1.2;
+}
+.mi-lo-mio-cabecera p {
+    margin: 0;
+    color: #ad9674;
+    font-size: 14px;
+    line-height: 1.5;
+}
+/* =========================================================
+   GRID
+   ========================================================= */
+.mi-contenido-grid-antiguo {
+    width:
+        min(1120px, 90%);
+    margin:
+        0 auto;
+    display: grid;
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    gap: 20px;
+}
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+.mi-seccion {
+    box-sizing: border-box;
+    padding: 22px;
+    border:
+        1px solid #715026;
+    border-radius: 8px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(73, 40, 15, 0.90),
+            rgba(45, 23, 9, 0.94)
+        );
+    box-shadow:
+        0 8px 22px
+        rgba(0, 0, 0, 0.36),
+        inset 0 1px
+        rgba(255, 220, 150, 0.04);
+    transition:
+        border-color 170ms ease,
+        background 170ms ease,
+        box-shadow 170ms ease;
+}
+/*
+    No se mueve la caja al pasar
+    el mouse.
+*/
+.mi-seccion:hover {
+    border-color: #87602c;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(78, 44, 17, 0.93),
+            rgba(48, 25, 10, 0.96)
+        );
+    box-shadow:
+        0 9px 24px
+        rgba(0, 0, 0, 0.40),
+        inset 0 1px
+        rgba(255, 220, 150, 0.06);
+}
+.mi-seccion-ancha {
+    grid-column:
+        1 / -1;
+}
+/* =========================================================
+   CABECERA DE TARJETAS
+   ========================================================= */
+.mi-seccion-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content:
+        space-between;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom:
+        1px solid #765326;
+}
+.mi-seccion-cabecera > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.mi-seccion-icono {
+    font-size: 23px;
+}
+.mi-seccion-cabecera small {
+    display: block;
+    margin-bottom: 3px;
+    color: #9d7d50;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1.3;
+    letter-spacing: 1.3px;
+}
+.mi-seccion-cabecera h2 {
+    margin: 0;
+    color: #e6c074;
+    font-size: 21px;
+    line-height: 1.25;
+}
+.mi-seccion-cabecera > button {
+    padding:
+        8px 10px;
+    border: none;
+    background: transparent;
+    color: #dfad55;
+    font:
+        bold 13px Georgia,
+        "Times New Roman",
+        serif;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        color 140ms ease,
+        background 140ms ease;
+}
+.mi-seccion-cabecera > button:hover {
+    color: #f4cd7b;
+    background:
+        rgba(219, 166, 75, 0.06);
+}
+/* =========================================================
+   LISTAS
+   ========================================================= */
+.mi-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+}
+.mi-item {
+    width: var(--mp-tarjeta-ancho);
+    min-height: var(--mp-tarjeta-alto);
+    box-sizing: border-box;
+    position: relative;
+    min-height: 56px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding:
+        12px 82px 12px 13px;
+    border:
+        1px solid transparent;
+    border-radius: 5px;
+    background:
+        rgba(236, 197, 119, 0.055);
+    transition:
+        border-color 140ms ease,
+        background 140ms ease;
+}
+.mi-item:hover {
+    border-color:
+        rgba(193, 141, 57, 0.30);
+    background:
+        rgba(236, 197, 119, 0.085);
+}
+.mi-item p {
+    margin: 0;
+    color: #dfcca4;
+    font-size: 15px;
+    line-height: 1.55;
+}
+/* =========================================================
+   FRASES
+   ========================================================= */
+.mi-frase {
+    cursor: pointer;
+}
+.mi-frase-radio {
+    flex:
+        0 0 17px;
+    width: 17px;
+    height: 17px;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    border:
+        1px solid #876333;
+    border-radius: 50%;
+}
+.mi-frase-radio span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: transparent;
+    transition:
+        background 140ms ease,
+        box-shadow 140ms ease;
+}
+.mi-frase-contenido {
+    min-width: 0;
+}
+.mi-frase-contenido small {
+    display: block;
+    margin-top: 5px;
+    color: #c0924c;
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 1.3;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+}
+/* =========================================================
+   ACCIONES DE CADA ITEM
+   ========================================================= */
+.mi-item-acciones {
+    position: absolute;
+    right: 8px;
+    display: flex;
+    gap: 5px;
+    opacity: 0;
+    transition:
+        opacity 140ms ease;
+}
+.mi-item:hover
+.mi-item-acciones {
+    opacity: 1;
+}
+.mi-item-acciones button {
+    width: 31px;
+    height: 31px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border:
+        1px solid #745126;
+    border-radius: 4px;
+    background:
+        rgba(61, 32, 11, 0.90);
+    color: #d9b36d;
+    font-size: 15px;
+    cursor: pointer;
+    transition:
+        background 130ms ease,
+        border-color 130ms ease,
+        color 130ms ease;
+}
+.mi-item-acciones button:hover {
+    background: #5b3917;
+    border-color: #8a622a;
+    color: #f1ce84;
+}
+.mi-item-acciones
+.mi-quitar:hover {
+    background: #633026;
+    border-color: #8c4a3d;
+    color: #f1b5a8;
+}
+/* =========================================================
+   ESTADO VACÍO
+   ========================================================= */
+.mi-vacio {
+    margin:
+        22px 4px 5px;
+    color: #a9916e;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.5;
+}
+/* =========================================================
+   VOLVER ARRIBA
+   ========================================================= */
+.mi-volver-arriba-final {
+    display: block;
+    margin:
+        34px auto 0;
+    padding:
+        10px 16px;
+    border: none;
+    background: transparent;
+    color: #b59767;
+    font:
+        14px Georgia,
+        "Times New Roman",
+        serif;
+    cursor: pointer;
+    transition:
+        color 140ms ease;
+}
+.mi-volver-arriba-final:hover {
+    color: #dfbb72;
+}
+/* =========================================================
+   EDITOR
+   ========================================================= */
+.mi-editor {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background:
+        rgba(8, 4, 2, 0.72);
+    backdrop-filter:
+        blur(6px);
+    animation:
+        mi-editor-fondo
+        160ms
+        ease-out;
+}
+@keyframes mi-editor-fondo {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.mi-editor-contenido {
+    position: relative;
+    width:
+        min(590px, 92vw);
+    box-sizing: border-box;
+    padding: 28px;
+    border:
+        1px solid #92652b;
+    border-radius: 9px;
+    background:
+        linear-gradient(
+            145deg,
+            #dfc38a,
+            #bd9254
+        );
+    color: #301c0b;
+    box-shadow:
+        0 22px 60px
+        rgba(0, 0, 0, 0.65),
+        inset 0 1px
+        rgba(255, 245, 211, 0.65);
+    animation:
+        mi-editor-aparece
+        180ms
+        ease-out;
+}
+@keyframes mi-editor-aparece {
+    from {
+        opacity: 0;
+        transform:
+            scale(0.985);
+    }
+    to {
+        opacity: 1;
+        transform:
+            scale(1);
+    }
+}
+.mi-editor-cerrar {
+    position: absolute;
+    top: 10px;
+    right: 13px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: #624017;
+    font-size: 27px;
+    cursor: pointer;
+}
+/* =========================================================
+   IDENTIDAD DEL EDITOR
+   ========================================================= */
+.mi-editor-identidad {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 20px;
+}
+.mi-editor-avatar {
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    border:
+        1px solid #8b612c;
+    border-radius: 50%;
+    background:
+        rgba(75, 42, 15, 0.15);
+}
+.mi-editor-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position:
+        center top;
+}
+.mi-editor-identidad small {
+    color: #76501f;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+.mi-editor-identidad h2 {
+    margin:
+        3px 0 0;
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 1.25;
+}
+/* =========================================================
+   PREVIEW DEL EDITOR
+   ========================================================= */
+.mi-editor-preview {
+    margin-bottom: 12px;
+    padding:
+        11px 14px;
+    border-left:
+        3px solid #85581f;
+    background:
+        rgba(85, 49, 15, 0.08);
+}
+.mi-editor-preview span {
+    color: #795323;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+.mi-editor-preview p {
+    margin:
+        6px 0 0;
+    color: #3d250f;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+}
+/* =========================================================
+   INPUTS DEL EDITOR
+   ========================================================= */
+.mi-editor-contenido textarea,
+.mi-editor-contenido textarea {
+    min-height: 135px;
+    padding: 13px;
+    resize: vertical;
+    line-height: 1.6;
+}
+.mi-editor-contenido textarea:focus {
+    border-color: #684116;
+    box-shadow:
+        0 0 0 2px
+        rgba(94, 57, 17, 0.10);
+}
+/* =========================================================
+   PIE DEL EDITOR
+   ========================================================= */
+.mi-editor-pie {
+    display: flex;
+    align-items: center;
+    justify-content:
+        space-between;
+    gap: 15px;
+    margin-top: 12px;
+}
+.mi-editor-pie > span {
+    color: #76562f;
+    font-size: 11px;
+}
+.mi-editor-acciones {
+    display: flex;
+    gap: 7px;
+}
+.mi-editor-acciones button {
+    padding:
+        9px 17px;
+    border-radius: 5px;
+    font:
+        bold 13px Georgia,
+        "Times New Roman",
+        serif;
+    cursor: pointer;
+}
+.mi-editor-cancelar {
+    border:
+        1px solid #8b663a;
+    background: transparent;
+    color: #573815;
+}
+.mi-editor-guardar {
+    border:
+        1px solid #603812;
+    background: #86531b;
+    color: #ffe0a0;
+}
+.mi-editor-guardar:hover {
+    background: #99621f;
+}
+.mi-editor-acciones
+button:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+/* =========================================================
+   MENSAJES
+   ========================================================= */
+.mi-error,
+.mi-guardado {
+    position: fixed;
+    left: 50%;
+    bottom: 25px;
+    z-index: 1200;
+    transform:
+        translateX(-50%);
+    padding:
+        10px 17px;
+    border-radius: 5px;
+    box-shadow:
+        0 5px 18px #0008;
+    font:
+        bold 13px Georgia,
+        "Times New Roman",
+        serif;
+}
+.mi-error {
+    border:
+        1px solid #8e4434;
+    background: #6d2c20;
+    color: #ffe0d7;
+}
+.mi-guardado {
+    border:
+        1px solid #7b6731;
+    background: #42371b;
+    color: #ead18a;
+    animation:
+        mi-mensaje
+        160ms
+        ease-out;
+}
+@keyframes mi-mensaje {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* =========================================================
+   PANTALLAS GRANDES
+   ========================================================= */
+@media (min-width: 1200px) {
+    .mi-contenido {
+        width:
+            min(1120px, 88%);
+    }
+    .mi-seccion {
+        padding: 22px;
+    }
+    .mi-lista {
+        gap: 8px;
+    }
+}
+/* =========================================================
+   TABLET
+   ========================================================= */
+@media (max-width: 900px) {
+    .mi-navegador-lateral {
+        right: 9px;
+        width: 58px;
+        min-height: 105px;
+    }
+    .mi-navegador-lateral:hover {
+        width: 72px;
+    }
+    .mi-nav-texto {
+        font-size: 10px;
+    }
+    .mi-burbuja {
+        width:
+            min(330px, 38vw);
+    }
+}
+/* =========================================================
+   MÓVIL
+   ========================================================= */
+@media (max-width: 760px) {
+    .mi-hero {
+        min-height: 100vh;
+        padding-top: 80px;
+    }
+    .mi-encabezado h1 {
+        font-size: 45px;
+    }
+    .mi-encabezado p {
+        font-size: 15px;
+    }
+    .mi-personaje-escena {
+        height: 400px;
+    }
+    .mi-kaiser {
+        max-width: 82%;
+        height: 390px;
+    }
+    .mi-burbuja {
+        top: auto;
+        left: 50%;
+        bottom: 0;
+        width: 84%;
+        transform:
+            translateX(-50%);
+        padding:
+            15px 18px;
+    }
+    .mi-burbuja::before {
+        display: none;
+    }
+    .mi-burbuja-texto {
+        font-size: 16px;
+    }
+    .mi-estado-principal {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        text-align: center;
+    }
+    .mi-estado-principal strong {
+        white-space: normal;
+    }
+    .mi-lo-mio-cabecera h2 {
+        font-size: 29px;
+    }
+    .mi-lo-mio-cabecera p {
+        font-size: 13px;
+    }
+    .mi-contenido {
+        width: 92%;
+        grid-template-columns: 1fr;
+    }
+    .mi-seccion {
+        padding: 18px;
+    }
+    .mi-seccion-ancha {
+        grid-column: auto;
+    }
+    .mi-seccion-cabecera h2 {
+        font-size: 19px;
+    }
+    .mi-seccion-cabecera small {
+        font-size: 9px;
+    }
+    .mi-seccion-cabecera > button {
+        font-size: 12px;
+    }
+.mi-item {
+        padding-right: 10px;
+    }
+    .mi-item p {
+        font-size: 14px;
+    }
+    .mi-item-acciones {
+        position: static;
+        margin-left: auto;
+        opacity: 1;
+    }
+    /* Navegador inferior en móvil */
+    .mi-navegador-lateral {
+        top: auto;
+        right: 14px;
+        bottom: 18px;
+        transform: none;
+        width: auto;
+        min-height: auto;
+        padding:
+            10px 14px;
+        flex-direction: row;
+        border:
+            1px solid #805a26;
+        border-radius: 7px;
+    }
+    .mi-navegador-lateral:hover {
+        width: auto;
+    }
+    .mi-nav-flecha {
+        font-size: 20px;
+    }
+    .mi-nav-texto {
+        font-size: 10px;
+    }
+    .mi-editor-pie {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    .mi-editor-acciones {
+        justify-content: flex-end;
+    }
+}
+/* =========================================================
+   MÓVILES PEQUEÑOS
+   ========================================================= */
+@media (max-width: 480px) {
+    .mi-volver {
+        top: 12px;
+        left: 12px;
+        padding:
+            9px 13px;
+        font-size: 13px;
+    }
+    .mi-encabezado > span {
+        font-size: 9px;
+    }
+    .mi-encabezado h1 {
+        font-size: 40px;
+    }
+    .mi-personaje-escena {
+        height: 370px;
+    }
+    .mi-kaiser {
+        height: 355px;
+    }
+    .mi-seccion-cabecera {
+        align-items: flex-start;
+    }
+    .mi-seccion-cabecera > button {
+        padding-top: 3px;
+    }
+    .mi-editor-contenido {
+        padding:
+            24px 18px 20px;
+    }
+    .mi-editor-identidad h2 {
+        font-size: 22px;
+    }
+}
+/* ==================================================
+   RAMAS DE DIÁLOGO
+   ================================================== */
+.mi-dialogo-ramas {
+    width: 100%;
+    margin-top: 14px;
+}
+.mi-agregar-opciones {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px dashed rgba(226, 177, 96, 0.55);
+    border-radius: 8px;
+    background: rgba(62, 35, 18, 0.55);
+    color: #e8c98f;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+.mi-agregar-opciones:hover {
+    background: rgba(90, 50, 23, 0.7);
+    border-color: rgba(239, 190, 106, 0.9);
+}
+.mi-opciones-dialogo {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 16px;
+}
+.mi-opciones-intro {
+    padding: 4px 2px 8px;
+}
+.mi-opciones-intro strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #f0d4a0;
+    font-size: 16px;
+}
+.mi-opciones-intro p {
+    margin: 0;
+    color: rgba(239, 220, 184, 0.7);
+    font-size: 13px;
+    line-height: 1.45;
+}
+.mi-opcion-dialogo {
+    padding: 16px;
+    border: 1px solid rgba(193, 139, 70, 0.3);
+    border-radius: 9px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(59, 33, 18, 0.82),
+            rgba(37, 22, 14, 0.86)
+        );
+}
+.mi-opcion-numero {
+    margin-bottom: 13px;
+    color: #c99652;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+.mi-opcion-dialogo label {
+    display: block;
+    margin-bottom: 7px;
+    color: #ddc397;
+    font-size: 13px;
+}
+.mi-opcion-dialogo input,
+.mi-opcion-dialogo textarea {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid rgba(195, 146, 79, 0.38);
+    border-radius: 7px;
+    outline: none;
+    background: rgba(18, 12, 8, 0.7);
+    color: #f1dfbd;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+}
+.mi-opcion-dialogo input {
+    padding: 11px 12px;
+}
+.mi-opcion-dialogo textarea {
+    min-height: 76px;
+    padding: 11px 12px;
+    resize: vertical;
+}
+.mi-opcion-dialogo input:focus,
+.mi-opcion-dialogo textarea:focus {
+    border-color: rgba(230, 177, 92, 0.85);
+}
+.mi-rama-flecha {
+    padding: 7px 0;
+    color: #b47b3b;
+    text-align: center;
+    font-size: 19px;
+}
+.mi-frase-etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+}
+.mi-tiene-ramas {
+    color: #d6ad6c !important;
+    opacity: 0.9;
+}
+/* ==================================================
+   SCROLL DEL EDITOR / MODAL
+   ================================================== */
+.mi-editor {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    scrollbar-width: auto;
+    scrollbar-color: #b97a36 rgba(31, 18, 10, 0.85);
+}
+/* Chrome / Edge */
+.mi-editor::-webkit-scrollbar {
+    width: 13px;
+}
+.mi-editor::-webkit-scrollbar-track {
+    background: rgba(31, 18, 10, 0.88);
+    border-left: 1px solid rgba(215, 161, 82, 0.18);
+}
+.mi-editor::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            #d39a4d,
+            #8b5124
+        );
+    border: 3px solid rgba(31, 18, 10, 0.88);
+    border-radius: 20px;
+}
+.mi-editor::-webkit-scrollbar-thumb:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #e2ad61,
+            #a5652e
+        );
+}
+/* El cuadro puede crecer, pero nunca salirse de la pantalla */
+.mi-editor-contenido {
+    margin: auto;
+    max-height: none;
+    flex-shrink: 0;
+}
+/* =========================================================
+   AJUSTE: SOLO ESTADO + COSAS QUE DIGO
+   ========================================================= */
+.mi-contenido {
+    position: relative;
+    z-index: 3;
+    width: min(1120px, 90%);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 18px 0 80px;
+    box-sizing: border-box;
+    display: block;
+    scroll-margin-top: 0;
+}
+.mi-contenido-titulo {
+    margin-bottom: 32px;
+    text-align: center;
+}
+.mi-contenido-titulo > span {
+    color: #a17f50;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+.mi-contenido-titulo h2 {
+    margin: 6px 0 7px;
+    color: #e6c47e;
+    font-size: 32px;
+    font-weight: normal;
+    line-height: 1.2;
+}
+.mi-contenido-titulo p {
+    margin: 0;
+    color: #ad9674;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.mi-grid {
+    display: grid;
+    gap: 20px;
+}
+.mi-grid-solo-dialogos {
+    grid-template-columns: minmax(0, 1fr);
+}
+.mi-grid-solo-dialogos .mi-seccion {
+    width: 100%;
+    grid-column: 1 / -1;
+}
+@media (max-width: 760px) {
+    .mi-contenido { width: 92%; }
+    .mi-contenido-titulo h2 { font-size: 29px; }
+    .mi-contenido-titulo p { font-size: 13px; }
+}
+
+
+/* ============================================================
+   EDITOR RPG 6 RECURSOS — composición 16:9
+   1: taberna; 2: pergamino; 3: tablón; 4: placa/botón;
+   5: letrero colgante; 6: cabecera de madera.
+   Todo es decoración: la lógica JSX/API permanece intacta.
+   ============================================================ */
+.mi-personaje-rpg {
+  --asset-base: "/recursos/imagenes/editor_personaje/";
+  min-height: 100vh;
+  background: #1b0c05;
+  isolation: isolate;
+}
+.mi-personaje-rpg .mi-personaje-fondo {
+  background: linear-gradient(90deg,rgba(16,7,3,.35),rgba(16,7,3,.08) 46%,rgba(16,7,3,.24)),url('/recursos/imagenes/editor_personaje/1.png') center/cover no-repeat;
+  filter: none;
+}
+.mi-personaje-rpg .mi-luz-ambiente { opacity: .28; }
+.mi-personaje-rpg .mi-volver {
+  top: 2.3vh; left: 2vw; z-index: 100;
+  border: 0; border-radius: 0;
+  width: clamp(195px,18vw,315px); min-height: 66px;
+  background: url('/recursos/imagenes/editor_personaje/4.png') center/100% 100% no-repeat;
+  color: #ffe2a3; text-shadow: 0 2px 4px #160a03;
+  box-shadow: none; padding: 15px 25px;
+}
+.mi-personaje-rpg .mi-volver:hover { background: url('/recursos/imagenes/editor_personaje/4.png') center/100% 100% no-repeat; filter: brightness(1.15); }
+.mi-personaje-rpg .mi-hero {
+  position: relative; width: 57%; max-width: none; min-height: 100vh;
+  margin: 0 auto 0 0; padding: clamp(80px,8vh,115px) 1.5vw 2vh;
+  display: flex; flex-direction: column; align-items: center;
+}
+.mi-personaje-rpg .mi-encabezado {
+  position: relative; width: clamp(290px,31vw,590px);
+  min-height: clamp(120px,13vw,205px); padding: 22px 30px;
+  display: flex; flex-direction: column; justify-content: center;
+  background: url('/recursos/imagenes/editor_personaje/6.png') center/100% 100% no-repeat;
+  filter: drop-shadow(0 9px 9px #0009);
+}
+.mi-personaje-rpg .mi-encabezado > span { color:#e6ba6c; letter-spacing:3px; font-size:clamp(10px,.9vw,14px); }
+.mi-personaje-rpg .mi-encabezado h1 { margin:3px 0; color:#ffe0a1; font-size:clamp(37px,4.2vw,75px); }
+.mi-personaje-rpg .mi-encabezado p { margin:0; color:#f2cb88; font-size:clamp(14px,1.25vw,21px); }
+.mi-personaje-rpg .mi-vista-etiqueta { display:none; }
+.mi-personaje-rpg .mi-personaje-escena {
+  flex:1; min-height:300px; height:auto; width:100%; max-width:none;
+  margin-top:-10px;
+}
+.mi-personaje-rpg .mi-kaiser {
+  left: 38%; bottom:0; height:min(59vh,660px); max-width:68%;
+  object-position:bottom center; filter:drop-shadow(0 15px 20px #000c);
+}
+.mi-personaje-rpg .mi-sombra-suelo { left:39%; width:40%; }
+.mi-personaje-rpg .mi-resplandor { left:40%; }
+.mi-personaje-rpg .mi-burbuja {
+  top:10%; left:63%; width:clamp(250px,26vw,470px);
+  min-height:135px; padding:28px 42px 25px 58px;
+  background:url('/recursos/imagenes/editor_personaje/2.png') center/100% 100% no-repeat;
+  border:0; border-radius:0; box-shadow:none; color:#39200e;
+  filter:drop-shadow(0 8px 9px #0009);
+}
+.mi-personaje-rpg .mi-burbuja::before { display:none; }
+.mi-personaje-rpg .mi-burbuja-nombre { color:#613914; font-size:clamp(15px,1.3vw,22px); }
+.mi-personaje-rpg .mi-burbuja-texto { color:#2c1808; font-size:clamp(14px,1.15vw,20px); }
+.mi-personaje-rpg .mi-estado-principal {
+  width:min(94%,700px); min-height:86px; padding:16px 28px;
+  border:0; grid-template-columns:auto minmax(0,1fr) auto;
+  background:url('/recursos/imagenes/editor_personaje/4.png') center/100% 100% no-repeat;
+  filter:drop-shadow(0 5px 7px #0009);
+}
+.mi-personaje-rpg .mi-estado-principal span { color:#e3b66b; }
+.mi-personaje-rpg .mi-estado-principal strong { color:#f7dfae; }
+.mi-personaje-rpg .mi-estado-principal button { color:#ffcc7e; }
+.mi-personaje-rpg .mi-acciones-principales {
+  flex-direction:row; justify-content:center; flex-wrap:wrap;
+  gap:8px; width:100%; margin:10px 0 12px;
+}
+.mi-personaje-rpg .mi-decir-principal,
+.mi-personaje-rpg .mi-ver-como {
+  width:clamp(200px,22vw,355px); min-height:73px;
+  border:0; border-radius:0; padding:16px 25px;
+  background:url('/recursos/imagenes/editor_personaje/4.png') center/100% 100% no-repeat;
+  box-shadow:none; color:#ffdf9f; font:bold clamp(13px,1.2vw,19px) Georgia,serif;
+  text-shadow:0 2px 3px #140a03;
+}
+.mi-personaje-rpg .mi-decir-principal:hover,
+.mi-personaje-rpg .mi-ver-como:hover { filter:brightness(1.2); }
+.mi-personaje-rpg .mi-contenido {
+  position:absolute; z-index:8; top:3.2vh; right:1.5vw;
+  width:clamp(450px,41vw,780px); height:93vh; min-height:0;
+  margin:0; padding:clamp(48px,5vw,90px) clamp(43px,4.6vw,88px) clamp(55px,5vw,95px);
+  background:url('/recursos/imagenes/editor_personaje/3.png') center/100% 100% no-repeat;
+  filter:drop-shadow(0 10px 16px #0009);
+  overflow:hidden; display:flex; flex-direction:column;
+}
+.mi-personaje-rpg .mi-contenido-titulo { margin:0 0 12px; text-align:center; flex:none; }
+.mi-personaje-rpg .mi-contenido-titulo > span { display:none; }
+.mi-personaje-rpg .mi-contenido-titulo h2 { color:#38200e; font-size:clamp(21px,1.7vw,31px); font-weight:bold; }
+.mi-personaje-rpg .mi-contenido-titulo p { color:#593515; font-size:clamp(12px,1vw,17px); }
+.mi-personaje-rpg .mi-grid { min-height:0; flex:1; display:flex; flex-direction:column; }
+.mi-personaje-rpg .mi-seccion {
+  display:flex; flex-direction:column; min-height:0; flex:1;
+  border:0; border-radius:0; padding:0; background:transparent; box-shadow:none;
+}
+.mi-personaje-rpg .mi-seccion:hover { border:0; background:transparent; box-shadow:none; }
+.mi-personaje-rpg .mi-seccion-cabecera {
+  padding:12px 10px; border:0;
+  background:url('/recursos/imagenes/editor_personaje/4.png') center/100% 100% no-repeat;
+}
+.mi-personaje-rpg .mi-seccion-cabecera small { color:#caa16b; }
+.mi-personaje-rpg .mi-seccion-cabecera h2 { color:#ffe0a0; }
+.mi-personaje-rpg .mi-seccion-cabecera > button {
+  color:#ffe3a3; background:#80501e; border:1px solid #d4a45b;
+  border-radius:5px; padding:9px 14px;
+}
+.mi-personaje-rpg .mi-lista { flex:1; min-height:0; overflow-y:auto; padding:5px 5px 12px; margin-top:12px; scrollbar-color:#9a612c transparent; }
+.mi-personaje-rpg .mi-item { background:#dfb57a; border:1px solid #a77944; border-radius:3px; }
+.mi-personaje-rpg .mi-item:hover { background:#efc58a; }
+.mi-personaje-rpg .mi-item p { color:#3b240f; }
+.mi-personaje-rpg .mi-frase-etiquetas small { color:#85552b; }
+.mi-personaje-rpg .mi-item-acciones button { color:#663c1c; }
+.mi-personaje-rpg .mi-vacio { color:#563419; }
+.mi-personaje-rpg .mi-navegador-lateral {
+  position:fixed; top:32vh; left:1.3vw; right:auto;
+  width:clamp(120px,11vw,190px); min-height:100px;
+  transform:none; padding:15px; border:0; border-radius:0;
+  background:url('/recursos/imagenes/editor_personaje/5.png') center/100% 100% no-repeat;
+  color:#ffe1a4; box-shadow:none; text-shadow:0 2px 3px #000;
+}
+.mi-personaje-rpg .mi-navegador-lateral:hover { width:clamp(120px,11vw,190px); background:url('/recursos/imagenes/editor_personaje/5.png') center/100% 100% no-repeat; filter:brightness(1.15); }
+/* El editor modal y los campos mantienen sus reglas originales. */
+@media (max-width:1100px) {
+ .mi-personaje-rpg .mi-hero { width:100%; min-height:750px; padding-top:100px; }
+ .mi-personaje-rpg .mi-contenido { position:relative; top:auto; right:auto; width:min(94%,800px); height:680px; margin:20px auto 40px; }
+ .mi-personaje-rpg .mi-navegador-lateral { top:180px; }
+ .mi-personaje-rpg .mi-kaiser { height:min(55vh,500px); }
+ .mi-personaje-rpg .mi-burbuja { left:59%; }
+}
+@media (max-width:650px) {
+ .mi-personaje-rpg .mi-hero { min-height:720px; padding-top:110px; }
+ .mi-personaje-rpg .mi-encabezado { width:90%; min-height:140px; }
+ .mi-personaje-rpg .mi-personaje-escena { min-height:330px; }
+ .mi-personaje-rpg .mi-kaiser { left:38%; height:350px; max-width:77%; }
+ .mi-personaje-rpg .mi-burbuja { top:10px; left:51%; width:49%; min-height:105px; padding:22px 22px 18px 28px; }
+ .mi-personaje-rpg .mi-burbuja-texto { font-size:12px; }
+ .mi-personaje-rpg .mi-estado-principal { width:100%; padding:15px 18px; gap:7px; }
+ .mi-personaje-rpg .mi-estado-principal strong { font-size:12px; }
+ .mi-personaje-rpg .mi-acciones-principales { gap:0; }
+ .mi-personaje-rpg .mi-decir-principal,.mi-personaje-rpg .mi-ver-como { min-height:62px; width:49%; font-size:12px; padding:8px; }
+ .mi-personaje-rpg .mi-contenido { width:100%; height:660px; padding:65px 34px 80px; }
+ .mi-personaje-rpg .mi-contenido-titulo h2 { font-size:21px; }
+ .mi-personaje-rpg .mi-contenido-titulo p { font-size:12px; }
+ .mi-personaje-rpg .mi-navegador-lateral { top:23px; left:auto; right:12px; width:105px; min-height:55px; padding:5px; }
+ .mi-personaje-rpg .mi-navegador-lateral:hover { width:105px; }
+ .mi-personaje-rpg .mi-nav-flecha { font-size:19px; }
+ .mi-personaje-rpg .mi-nav-texto { font-size:9px; }
+}
+
+/* ============================================================
+   LEGIBILIDAD RPG — corrección integrada
+   Mantiene todas las imágenes, posiciones y funcionalidad.
+   ============================================================ */
+
+/* Títulos claros sobre el fondo oscuro de la taberna. */
+.mi-personaje-rpg .mi-contenido-titulo h2 {
+  color: #fff0c8;
+  text-shadow: 0 2px 4px #160802, 0 0 12px rgba(0,0,0,.7);
+}
+.mi-personaje-rpg .mi-contenido-titulo p {
+  color: #ffdfad;
+  text-shadow: 0 2px 4px #160802, 0 0 9px rgba(0,0,0,.75);
+}
+
+/* El diálogo está sobre un letrero de madera, no sobre papel claro. */
+.mi-personaje-rpg .mi-burbuja-nombre {
+  color: #fff0cb;
+  text-shadow: 0 2px 3px #160903, 0 0 7px rgba(0,0,0,.8);
+}
+.mi-personaje-rpg .mi-burbuja-texto {
+  color: #ffe3ac;
+  text-shadow: 0 2px 3px #160903, 0 0 7px rgba(0,0,0,.8);
+}
+
+/* La identidad, los controles y la barra de estado usan madera oscura. */
+.mi-personaje-rpg .mi-encabezado > span,
+.mi-personaje-rpg .mi-encabezado h1,
+.mi-personaje-rpg .mi-encabezado p,
+.mi-personaje-rpg .mi-estado-principal span,
+.mi-personaje-rpg .mi-estado-principal strong,
+.mi-personaje-rpg .mi-estado-principal button,
+.mi-personaje-rpg .mi-seccion-cabecera h2,
+.mi-personaje-rpg .mi-seccion-cabecera small,
+.mi-personaje-rpg .mi-seccion-cabecera button,
+.mi-personaje-rpg .mi-nav-texto {
+  text-shadow: 0 2px 3px #1a0902, 0 0 8px rgba(0,0,0,.55);
+}
+
+/* Las frases están en tarjetas de pergamino claro: texto oscuro. */
+.mi-personaje-rpg .mi-item p,
+.mi-personaje-rpg .mi-frase-contenido small,
+.mi-personaje-rpg .mi-frase-etiquetas small {
+  color: #39210d;
+  text-shadow: none;
+}
+
+/* Botones y navegación legibles, sin afectar los modales claros. */
+.mi-personaje-rpg .mi-volver,
+.mi-personaje-rpg .mi-decir-principal,
+.mi-personaje-rpg .mi-ver-como,
+.mi-personaje-rpg .mi-navegador-lateral {
+  color: #ffe7b6;
+  text-shadow: 0 2px 4px #160802, 0 0 6px rgba(0,0,0,.5);
+}
+.mi-personaje-rpg button:focus-visible {
+  outline: 2px solid #ffd77b;
+  outline-offset: 3px;
+}
+
+/* Evita que seleccionar texto pinte grandes rectángulos encima del arte. */
+.mi-personaje-rpg ::selection {
+  background: rgba(184, 124, 39, .3);
+  color: inherit;
+}
+
+
+/* ============================================================
+   AJUSTE DE COMPOSICIÓN — perfil RPG
+   Mantiene los 6 recursos y el editor de frases.
+   ============================================================ */
+.mi-personaje-rpg { overflow-x:hidden; }
+.mi-personaje-rpg .mi-navegador-lateral,
+.mi-personaje-rpg .mi-volver-arriba-final { display:none !important; }
+
+/* Letrero: madera y letras se mueven juntas hacia la derecha.
+   Se deja el rostro del aventurero despejado. */
+.mi-personaje-rpg .mi-hero { padding-top:clamp(70px,7vh,100px); }
+.mi-personaje-rpg .mi-encabezado {
+  box-sizing:border-box;
+  align-self:flex-end;
+  margin-right:clamp(12px,3vw,65px);
+  width:clamp(320px,33vw,570px);
+  min-height:clamp(145px,12vw,190px);
+  padding:clamp(42px,4.1vw,66px) 13% 30px;
+  justify-content:center;
+  z-index:3;
+}
+.mi-personaje-rpg .mi-encabezado > span { font-size:clamp(10px,.8vw,13px); line-height:1.1; }
+.mi-personaje-rpg .mi-encabezado h1 { font-size:clamp(35px,3.5vw,62px); line-height:1.05; }
+.mi-personaje-rpg .mi-encabezado p { font-size:clamp(13px,1.1vw,18px); line-height:1.15; }
+
+/* El personaje no queda tapado por la placa de madera. */
+.mi-personaje-rpg .mi-personaje-escena { z-index:4; margin-top:-12px; }
+.mi-personaje-rpg .mi-kaiser { z-index:3; left:37%; height:min(61vh,670px); }
+.mi-personaje-rpg .mi-resplandor,
+.mi-personaje-rpg .mi-sombra-suelo { z-index:0; }
+.mi-personaje-rpg .mi-burbuja { z-index:5; }
+
+/* Pergamino: texto y controles dentro de su superficie útil. */
+.mi-personaje-rpg .mi-contenido {
+  right:1vw;
+  top:2vh;
+  height:95vh;
+  padding:clamp(105px,11.7vh,145px) clamp(50px,4.6vw,88px) clamp(85px,10vh,120px);
+}
+.mi-personaje-rpg .mi-contenido-titulo { margin:0 0 14px; padding:0 5px; }
+.mi-personaje-rpg .mi-contenido-titulo h2 {
+  color:#3d240f; text-shadow:0 1px 0 #ffe2aa;
+  font-size:clamp(20px,1.65vw,29px); line-height:1.13;
+  margin:0 0 7px;
+}
+.mi-personaje-rpg .mi-contenido-titulo p {
+  color:#5c3718; text-shadow:none;
+  font-size:clamp(12px,.92vw,15px); line-height:1.35;
+  margin:0;
+}
+.mi-personaje-rpg .mi-seccion-cabecera { flex-shrink:0; }
+.mi-personaje-rpg .mi-lista { padding:8px 5px 12px; }
+.mi-personaje-rpg .mi-item { box-shadow:0 2px 3px #68401a25; }
+
+@media(max-width:1100px) {
+  .mi-personaje-rpg .mi-hero { width:100%; padding-top:95px; }
+  .mi-personaje-rpg .mi-encabezado { align-self:center; margin-right:0; }
+  .mi-personaje-rpg .mi-contenido {
+    position:relative; top:auto; right:auto;
+    width:min(94%,800px); height:690px;
+    margin:15px auto 35px;
+    padding:110px 60px 90px;
+  }
+}
+@media(max-width:650px) {
+  .mi-personaje-rpg .mi-hero { padding-top:95px; }
+  .mi-personaje-rpg .mi-encabezado {
+    width:min(95%,420px); min-height:150px;
+    padding:42px 55px 25px;
+  }
+  .mi-personaje-rpg .mi-personaje-escena { z-index:4; }
+  .mi-personaje-rpg .mi-kaiser { left:38%; height:350px; }
+  .mi-personaje-rpg .mi-contenido {
+    width:100%; height:680px;
+    padding:115px 38px 100px;
+  }
+  .mi-personaje-rpg .mi-contenido-titulo h2 { font-size:20px; }
+  .mi-personaje-rpg .mi-contenido-titulo p { font-size:12px; }
+}
+
+
+/* ============================================================
+   CORRECCIÓN FINAL — BARRA DE ESTADO Y BOTONES INFERIORES
+   Los controles quedan centrados, con anchuras consistentes.
+   ============================================================ */
+.mi-personaje-rpg .mi-hero {
+  box-sizing: border-box;
+  padding-bottom: 24px;
+}
+.mi-personaje-rpg .mi-estado-principal {
+  flex: none;
+  width: min(94%, 700px);
+  min-height: var(--ajuste-estado-alto);
+  margin: var(--ajuste-estado-margen-superior) auto 0;
+  padding: 14px 26px;
+  grid-template-columns: minmax(90px, 1fr) minmax(0, 2fr) minmax(70px, 1fr);
+  column-gap: 8px;
+  align-items: center;
+  justify-items: center;
+  box-sizing: border-box;
+  transform: translate(var(--ajuste-estado-x), var(--ajuste-estado-y));
+}
+.mi-personaje-rpg .mi-estado-principal span,
+.mi-personaje-rpg .mi-estado-principal strong,
+.mi-personaje-rpg .mi-estado-principal button {
+  margin: 0;
+  line-height: 1.25;
+  text-align: center;
+}
+.mi-personaje-rpg .mi-estado-principal strong {
+  min-width: 0;
+  max-width: 100%;
+}
+.mi-personaje-rpg .mi-acciones-principales {
+  flex: none;
+  box-sizing: border-box;
+  width: min(94%, 700px);
+  margin: var(--ajuste-acciones-margen-superior) auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  justify-items: stretch;
+  gap: var(--ajuste-acciones-separacion);
+  transform: translate(var(--ajuste-acciones-x), var(--ajuste-acciones-y));
+}
+.mi-personaje-rpg .mi-acciones-principales .mi-decir-principal,
+.mi-personaje-rpg .mi-acciones-principales .mi-ver-como {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--ajuste-botones-alto);
+  margin: 0;
+  padding: 12px 18px;
+  text-align: center;
+  line-height: 1.15;
+  white-space: normal;
+}
+.mi-personaje-rpg .mi-acciones-principales .mi-ver-como span {
+  flex: none;
+}
+@media (max-width: 1100px) {
+  .mi-personaje-rpg .mi-hero { min-height: 750px; }
+}
+@media (max-width: 650px) {
+  .mi-personaje-rpg .mi-estado-principal {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto;
+    padding: 12px 14px;
+  }
+  .mi-personaje-rpg .mi-estado-principal span { font-size: 9px; }
+  .mi-personaje-rpg .mi-estado-principal strong { font-size: 11px; }
+  .mi-personaje-rpg .mi-acciones-principales { width: 100%; }
+  .mi-personaje-rpg .mi-acciones-principales .mi-decir-principal,
+  .mi-personaje-rpg .mi-acciones-principales .mi-ver-como {
+    min-height: 64px;
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================================
+   PANEL DE PERSONALIZACIÓN — EDITA SOLO ESTOS VALORES
+   Puedes modificar posiciones, tamaños, colores y tipografías.
+   0px = posición original; X positivo = derecha; Y positivo = abajo.
+   ============================================================ */
+.mi-personaje-rpg {
+  /* Barra AHORA MISMO */
+  --ajuste-estado-x: 0px;
+  --ajuste-estado-y: 0px;
+  --ajuste-estado-alto: 86px;
+  --ajuste-estado-margen-superior: 0px;
+
+  /* Botones AGREGAR y VERME COMO */
+  --ajuste-acciones-x: 0px;
+  --ajuste-acciones-y: 0px;
+  --ajuste-acciones-margen-superior: 8px;
+  --ajuste-acciones-separacion: 12px;
+  --ajuste-botones-alto: 73px;
+
+  /* Posición y tamaño del personaje */
+  --ajuste-personaje-x: 0px;
+  --ajuste-personaje-y: 0px;
+  --ajuste-personaje-escala: 1;
+
+  /* Colores generales */
+  --ajuste-texto-principal: #ffe0a1;
+  --ajuste-texto-secundario: #f2cb88;
+  --ajuste-fuente: Georgia, "Times New Roman", serif;
+  --ajuste-tamano-botones: 16px;
+}
+/* Ajustes de estilo conectados al panel */
+.mi-personaje-rpg .mi-encabezado h1 { color: var(--ajuste-texto-principal); }
+.mi-personaje-rpg .mi-encabezado p { color: var(--ajuste-texto-secundario); }
+.mi-personaje-rpg .mi-encabezado,
+.mi-personaje-rpg .mi-estado-principal,
+.mi-personaje-rpg .mi-acciones-principales { font-family: var(--ajuste-fuente); }
+.mi-personaje-rpg .mi-acciones-principales .mi-decir-principal,
+.mi-personaje-rpg .mi-acciones-principales .mi-ver-como {
+  font-family: var(--ajuste-fuente);
+  font-size: var(--ajuste-tamano-botones);
+}
+.mi-personaje-rpg .mi-kaiser {
+  transform: translateX(calc(-50% + var(--ajuste-personaje-x)))
+             translateY(var(--ajuste-personaje-y))
+             scale(var(--ajuste-personaje-escala));
+  transform-origin: bottom center;
+}
+
+
+/* ============================================================
+   CONEXIONES DEL PANEL MANUAL (no es necesario editar aquí)
+   Los valores editables están AL FINAL del archivo.
+   Transformaciones independientes: no cambian la posición
+   de otros elementos en el flujo.
+   ============================================================ */
+.mi-personaje-rpg .mi-volver {
+  top:var(--mp-volver-top); left:var(--mp-volver-left);
+  width:var(--mp-volver-ancho); height:var(--mp-volver-alto);
+  transform:translate(var(--mp-volver-x),var(--mp-volver-y)) scale(var(--mp-volver-escala));
+  color:var(--mp-volver-color); font-family:var(--mp-fuente); font-size:var(--mp-volver-fuente);
+}
+.mi-personaje-rpg .mi-hero { padding-top:var(--mp-hero-padding-top); }
+.mi-personaje-rpg .mi-encabezado {
+  width:var(--mp-cabecera-ancho); min-height:var(--mp-cabecera-alto);
+  margin-right:var(--mp-cabecera-margen-derecho);
+  transform:translate(var(--mp-cabecera-x),var(--mp-cabecera-y)) scale(var(--mp-cabecera-escala)) rotate(var(--mp-cabecera-giro));
+  transform-origin:center center;
+}
+.mi-personaje-rpg .mi-encabezado > span {
+  display:var(--mp-etiqueta-visible); font-size:var(--mp-etiqueta-fuente);
+  color:var(--mp-etiqueta-color); font-family:var(--mp-fuente);
+  transform:translate(var(--mp-etiqueta-x),var(--mp-etiqueta-y));
+}
+.mi-personaje-rpg .mi-encabezado h1 {
+  font-size:var(--mp-nombre-fuente); color:var(--mp-nombre-color);
+  font-family:var(--mp-fuente-nombre);
+  transform:translate(var(--mp-nombre-x),var(--mp-nombre-y)) scale(var(--mp-nombre-escala));
+}
+.mi-personaje-rpg .mi-encabezado p {
+  font-size:var(--mp-rol-fuente); color:var(--mp-rol-color);
+  font-family:var(--mp-fuente);
+  transform:translate(var(--mp-rol-x),var(--mp-rol-y));
+}
+.mi-personaje-rpg .mi-personaje-escena {
+  transform:translate(var(--mp-escena-x),var(--mp-escena-y));
+}
+.mi-personaje-rpg .mi-kaiser {
+  left:var(--mp-personaje-left); height:var(--mp-personaje-alto);
+  transform:translateX(calc(-50% + var(--mp-personaje-x)))
+            translateY(var(--mp-personaje-y))
+            scale(var(--mp-personaje-escala)) rotate(var(--mp-personaje-giro));
+  transform-origin:bottom center;
+}
+.mi-personaje-rpg .mi-burbuja {
+  top:var(--mp-dialogo-top); left:var(--mp-dialogo-left);
+  width:var(--mp-dialogo-ancho); min-height:var(--mp-dialogo-alto);
+  transform:translate(var(--mp-dialogo-x),var(--mp-dialogo-y)) scale(var(--mp-dialogo-escala)) rotate(var(--mp-dialogo-giro));
+  transform-origin:center center;
+}
+.mi-personaje-rpg .mi-burbuja-nombre {
+  font-family:var(--mp-fuente); font-size:var(--mp-dialogo-nombre-fuente);
+  color:var(--mp-dialogo-nombre-color);
+  transform:translate(var(--mp-dialogo-nombre-x),var(--mp-dialogo-nombre-y));
+}
+.mi-personaje-rpg .mi-burbuja-texto {
+  font-family:var(--mp-fuente); font-size:var(--mp-dialogo-texto-fuente);
+  color:var(--mp-dialogo-texto-color);
+  transform:translate(var(--mp-dialogo-texto-x),var(--mp-dialogo-texto-y));
+}
+.mi-personaje-rpg .mi-contenido {
+  top:var(--mp-tablon-top); right:var(--mp-tablon-right);
+  width:var(--mp-tablon-ancho); height:var(--mp-tablon-alto);
+  padding:var(--mp-tablon-padding);
+  transform:translate(var(--mp-tablon-x),var(--mp-tablon-y)) scale(var(--mp-tablon-escala)) rotate(var(--mp-tablon-giro));
+  transform-origin:top right;
+}
+.mi-personaje-rpg .mi-contenido-titulo {
+  transform:translate(var(--mp-titulo-panel-x),var(--mp-titulo-panel-y));
+}
+.mi-personaje-rpg .mi-contenido-titulo h2 {
+  font-family:var(--mp-fuente-panel); font-size:var(--mp-titulo-panel-fuente);
+  color:var(--mp-titulo-panel-color);
+}
+.mi-personaje-rpg .mi-contenido-titulo p {
+  font-family:var(--mp-fuente-panel); font-size:var(--mp-subtitulo-panel-fuente);
+  color:var(--mp-subtitulo-panel-color);
+}
+.mi-personaje-rpg .mi-seccion-cabecera {
+  transform:translate(var(--mp-barra-frases-x),var(--mp-barra-frases-y)) scale(var(--mp-barra-frases-escala));
+}
+.mi-personaje-rpg .mi-seccion-cabecera h2 {
+  font-family:var(--mp-fuente-panel); font-size:var(--mp-barra-frases-fuente);
+  color:var(--mp-barra-frases-color);
+}
+.mi-personaje-rpg .mi-seccion-cabecera > button {
+  transform:translate(var(--mp-boton-agregar-x),var(--mp-boton-agregar-y)) scale(var(--mp-boton-agregar-escala));
+  font-family:var(--mp-fuente-panel); font-size:var(--mp-boton-agregar-fuente);
+  color:var(--mp-boton-agregar-color);
+}
+.mi-personaje-rpg .mi-lista {
+  transform:translate(var(--mp-lista-x),var(--mp-lista-y));
+}
+.mi-personaje-rpg .mi-item {
+  min-height:var(--mp-tarjeta-alto); background:var(--mp-tarjeta-fondo);
+  transform:scale(var(--mp-tarjeta-escala)); transform-origin:center top;
+}
+.mi-personaje-rpg .mi-item p {
+  font-family:var(--mp-fuente-panel); font-size:var(--mp-tarjeta-fuente);
+  color:var(--mp-tarjeta-color);
+}
+.mi-personaje-rpg .mi-estado-principal {
+  width:var(--mp-estado-ancho); min-height:var(--mp-estado-alto);
+  margin-top:var(--mp-estado-margen);
+  transform:translate(var(--mp-estado-x),var(--mp-estado-y)) scale(var(--mp-estado-escala)) rotate(var(--mp-estado-giro));
+}
+.mi-personaje-rpg .mi-estado-principal span {
+  font-family:var(--mp-fuente); font-size:var(--mp-estado-etiqueta-fuente);
+  color:var(--mp-estado-etiqueta-color);
+  transform:translate(var(--mp-estado-etiqueta-x),var(--mp-estado-etiqueta-y));
+}
+.mi-personaje-rpg .mi-estado-principal strong {
+  font-family:var(--mp-fuente); font-size:var(--mp-estado-texto-fuente);
+  color:var(--mp-estado-texto-color);
+  transform:translate(var(--mp-estado-texto-x),var(--mp-estado-texto-y));
+}
+.mi-personaje-rpg .mi-estado-principal button {
+  font-family:var(--mp-fuente); font-size:var(--mp-cambiar-fuente);
+  color:var(--mp-cambiar-color);
+  transform:translate(var(--mp-cambiar-x),var(--mp-cambiar-y)) scale(var(--mp-cambiar-escala));
+}
+.mi-personaje-rpg .mi-acciones-principales {
+  width:var(--mp-acciones-ancho); gap:var(--mp-acciones-separacion);
+  margin-top:var(--mp-acciones-margen);
+  transform:translate(var(--mp-acciones-x),var(--mp-acciones-y));
+}
+.mi-personaje-rpg .mi-acciones-principales .mi-decir-principal {
+  min-height:var(--mp-decir-alto); font-size:var(--mp-decir-fuente);
+  color:var(--mp-decir-color); font-family:var(--mp-fuente);
+  transform:translate(var(--mp-decir-x),var(--mp-decir-y)) scale(var(--mp-decir-escala)) rotate(var(--mp-decir-giro));
+}
+.mi-personaje-rpg .mi-acciones-principales .mi-ver-como {
+  min-height:var(--mp-ver-alto); font-size:var(--mp-ver-fuente);
+  color:var(--mp-ver-color); font-family:var(--mp-fuente);
+  transform:translate(var(--mp-ver-x),var(--mp-ver-y)) scale(var(--mp-ver-escala)) rotate(var(--mp-ver-giro));
+}
+/* ============================================================
+   PANEL DE CONFIGURACIÓN MANUAL — EDITA SOLO ESTA ZONA
+   X + mueve derecha | Y + mueve abajo | escala 1 = normal
+   Para rotar: 5deg o -5deg | tamaño: px, vw, vh o %
+   ============================================================ */
+.mi-personaje-rpg {
+  /* 0. FUENTES GLOBALES */
+  --mp-fuente: Georgia, "Times New Roman", serif;
+  --mp-fuente-nombre: Georgia, "Times New Roman", serif;
+  --mp-fuente-panel: Georgia, "Times New Roman", serif;
+
+  /* 1. BOTÓN VOLVER A LA TABERNA */
+  --mp-volver-top: 2.3vh;
+  --mp-volver-left: 2vw;
+  --mp-volver-x: 0px;
+  --mp-volver-y: 0px;
+  --mp-volver-ancho: clamp(195px, 18vw, 315px);
+  --mp-volver-alto: auto;
+  --mp-volver-escala: 1;
+  --mp-volver-fuente: 15px;
+  --mp-volver-color: #ffe7b6;
+
+  /* 2. PERGAMINO SUPERIOR CON NOMBRE Y ROL */
+  --mp-hero-padding-top: clamp(70px, 7vh, 100px);
+  --mp-cabecera-x: 0px;
+  --mp-cabecera-y: 0px;
+  --mp-cabecera-ancho: clamp(320px, 33vw, 570px);
+  --mp-cabecera-alto: clamp(145px, 12vw, 190px);
+  --mp-cabecera-margen-derecho: clamp(12px, 3vw, 65px);
+  --mp-cabecera-escala: 1;
+  --mp-cabecera-giro: 0deg;
+
+  /* 2A. ETIQUETA 'AVENTURERO' (texto editable en JSX) */
+  --mp-etiqueta-visible: none;
+  --mp-etiqueta-x: 0px;
+  --mp-etiqueta-y: 0px;
+  --mp-etiqueta-fuente: 12px;
+  --mp-etiqueta-color: #b58b4d;
+
+  /* 2B. NOMBRE (Kaiser, Ruoye, Kano...) */
+  --mp-nombre-x: 0px;
+  --mp-nombre-y: -12px;
+  --mp-nombre-escala: 1;
+  --mp-nombre-fuente: clamp(35px, 3.5vw, 62px);
+  --mp-nombre-color: #ffe0a1;
+
+  /* 2C. ROL (Dibujante, Músico...) */
+  --mp-rol-x: 0px;
+  --mp-rol-y: -13px;
+  --mp-rol-fuente: clamp(13px, 1.1vw, 18px);
+  --mp-rol-color: #f2cb88;
+
+  /* 3. PERSONAJE PNG (independiente del pergamino) */
+  --mp-escena-x: 0px;
+  --mp-escena-y: 0px;
+  --mp-personaje-left: 37%;
+  --mp-personaje-x: 0px;
+  --mp-personaje-y: 0px;
+  --mp-personaje-alto: min(61vh, 670px);
+  --mp-personaje-escala: 1;
+  --mp-personaje-giro: 0deg;
+
+  /* 4. CARTEL DE DIÁLOGO DE MADERA */
+  --mp-dialogo-top: -2%;
+  --mp-dialogo-left: 63%;
+  --mp-dialogo-x: -95px;
+  --mp-dialogo-y: 0px;
+  --mp-dialogo-ancho: clamp(250px, 26vw, 470px);
+  --mp-dialogo-alto: 235px;
+  --mp-dialogo-escala: 1;
+  --mp-dialogo-giro: 0deg;
+  --mp-dialogo-nombre-x: -29px;
+  --mp-dialogo-nombre-y: 85px;
+  --mp-dialogo-nombre-fuente: clamp(15px, 1.3vw, 22px);
+  --mp-dialogo-nombre-color: #fff0cb;
+  --mp-dialogo-texto-x: -29px;
+  --mp-dialogo-texto-y: 80px;
+  --mp-dialogo-texto-fuente: clamp(14px, 1.15vw, 20px);
+  --mp-dialogo-texto-color: #ffe3ac;
+
+  /* 5. TABLÓN GRANDE DERECHO */
+  --mp-tablon-top: 2vh;
+  --mp-tablon-right: 1vw;
+  --mp-tablon-x: 50px;
+  --mp-tablon-y: 10px;
+  --mp-tablon-ancho: clamp(1000px, 44vw, 1400px);
+  --mp-tablon-alto: 95vh;
+  --mp-tablon-escala: 1;
+  --mp-tablon-giro: 0deg;
+  --mp-tablon-padding: clamp(105px, 11.7vh, 145px) clamp(50px, 4.6vw, 88px) clamp(85px, 10vh, 120px);
+
+  /* 5A. TÍTULO Y SUBTÍTULO DEL TABLÓN */
+  --mp-titulo-panel-x: 0px;
+  --mp-titulo-panel-y: 48px;
+  --mp-titulo-panel-fuente: clamp(10px, 1.65vw, 29px);
+  --mp-titulo-panel-color: #3d240f;
+  --mp-subtitulo-panel-fuente: clamp(10px, .92vw, 15px);
+  --mp-subtitulo-panel-color: #5c3718;
+
+  /* 5B. BARRA 'MIS FRASES' */
+  --mp-barra-frases-x: 0px;
+  --mp-barra-frases-y: 10px;
+  --mp-barra-frases-escala: 1;
+  --mp-barra-frases-fuente: 21px;
+  --mp-barra-frases-color: #ffe0a1;
+  --mp-boton-agregar-x: 0px;
+  --mp-boton-agregar-y: 0px;
+  --mp-boton-agregar-escala: 1;
+  --mp-boton-agregar-fuente: 13px;
+  --mp-boton-agregar-color: #e97a1f;
+
+  /* 5C. LISTA Y TARJETAS DE FRASES */
+  --mp-lista-x: 107px;
+  --mp-lista-y: 58px;
+  --mp-tarjeta-alto: 53px;
+  --mp-tarjeta-ancho: 73.5%;  /* NUEVO: ancho de las tarjetas */
+  --mp-tarjeta-escala: 1;
+  --mp-tarjeta-fuente: 15px;
+  --mp-tarjeta-color: #39210d;
+  --mp-tarjeta-fondo: #dfb57a;
+
+  /* 6. BARRA INFERIOR 'AHORA MISMO' */
+  --mp-estado-x: 0px;
+  --mp-estado-y: 0px;
+  --mp-estado-ancho: min(94%, 700px);
+  --mp-estado-alto: 86px;
+  --mp-estado-margen: 0px;
+  --mp-estado-escala: 1;
+  --mp-estado-giro: 0deg;
+  --mp-estado-etiqueta-x: 0px;
+  --mp-estado-etiqueta-y: 0px;
+  --mp-estado-etiqueta-fuente: 10px;
+  --mp-estado-etiqueta-color: #e3b66b;
+  --mp-estado-texto-x: 0px;
+  --mp-estado-texto-y: 0px;
+  --mp-estado-texto-fuente: 15px;
+  --mp-estado-texto-color: #f7dfae;
+  --mp-cambiar-x: 0px;
+  --mp-cambiar-y: 0px;
+  --mp-cambiar-escala: 1;
+  --mp-cambiar-fuente: 13px;
+  --mp-cambiar-color: #ffcc7e;
+
+  /* 7. BOTONES INFERIORES */
+  --mp-acciones-x: 0px;
+  --mp-acciones-y: 0px;
+  --mp-acciones-ancho: min(94%, 500px);
+  --mp-acciones-margen: -8px;
+  --mp-acciones-separacion: 20px;
+  --mp-decir-x: 0px;
+  --mp-decir-y: 0px;
+  --mp-decir-alto: 73px;
+  --mp-decir-escala: 1;
+  --mp-decir-giro: 0deg;
+  --mp-decir-fuente: 16px;
+  --mp-decir-color: #ffe7b6;
+  --mp-ver-x: 0px;
+  --mp-ver-y: 0px;
+  --mp-ver-alto: 73px;
+  --mp-ver-escala: 1;
+  --mp-ver-giro: 0deg;
+  --mp-ver-fuente: 16px;
+  --mp-ver-color: #ffe7b6;
+}
+
+
+/* ============================================================
+   AJUSTES FINALES — SUPERPOSICIÓN Y BARRA DE FRASES
+   Edita estas variables al final para ajustar a tu gusto.
+   ============================================================ */
+.mi-personaje-rpg {
+  --mp-dialogo-capa: 30;             /* cartel delante del tablón */
+  --mp-dialogo-ancho-extra: 62px;    /* aumenta si la frase es larga */
+  --mp-agregar-superior: 0px;       /* botón + Agregar, vertical */
+  --mp-agregar-derecha: 0px;        /* botón + Agregar, horizontal */
+}
+/* El hero es una capa superior, pero deja pasar clics al tablón. */
+.mi-personaje-rpg .mi-hero {
+  z-index: 12;
+  pointer-events: none;
+}
+.mi-personaje-rpg .mi-hero button,
+.mi-personaje-rpg .mi-hero a {
+  pointer-events: auto;
+}
+.mi-personaje-rpg .mi-personaje-escena {
+  z-index: 12;
+  overflow: visible;
+}
+.mi-personaje-rpg .mi-burbuja {
+  z-index: var(--mp-dialogo-capa);
+  width: calc(var(--mp-dialogo-ancho) + var(--mp-dialogo-ancho-extra));
+}
+/* Oculta el texto AVENTURERO y centra mejor el nombre/rol. */
+.mi-personaje-rpg .mi-encabezado > span { display: none !important; }
+/* Quita la madera y las etiquetas de la cabecera de frases,
+   sin eliminar el botón funcional de añadir diálogos. */
+.mi-personaje-rpg .mi-seccion-cabecera {
+  background: none !important;
+  filter: none;
+  box-shadow: none;
+  border: 0;
+  padding: 0;
+  min-height: 34px;
+  justify-content: flex-end;
+}
+.mi-personaje-rpg .mi-seccion-cabecera > div { display: none; }
+.mi-personaje-rpg .mi-seccion-cabecera > button {
+  position: relative;
+  top: var(--mp-agregar-superior);
+  right: var(--mp-agregar-derecha);
+}
+
+
+/* ============================================================
+   PANEL FINAL — BOTONES INFERIORES: AGREGAR Y VERME COMO NPC
+   Modifica aquí sin buscar reglas anteriores.
+   ============================================================ */
+.mi-personaje-rpg {
+  --mp-vista-x: 0px;                 /* derecha + / izquierda - */
+  --mp-vista-y: 0px;                 /* abajo + / arriba - */
+  --mp-vista-ancho: 360px;
+  --mp-vista-alto: 64px;
+  --mp-vista-escala: 1;
+  --mp-vista-rotacion: 0deg;
+  --mp-vista-fuente: Georgia, "Times New Roman", serif;
+  --mp-vista-tamano-texto: 16px;
+  --mp-vista-color-texto: #ffe7b6;
+  --mp-vista-fondo: transparent;     /* la madera de fondo ya existe */
+  --mp-vista-margen-superior: 4px;
+  --mp-vista-borde: none;
+}
+
+/* Mantener un solo botón centrado, sin ocupar espacio sobrante */
+.mi-personaje-rpg .mi-estado-principal,
+.mi-personaje-rpg .mi-seccion-cabecera > button {
+  display: none !important;
+}
+.mi-personaje-rpg .mi-acciones-principales {
+  position: relative;
+  z-index: 25;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--mp-vista-margen-superior);
+  transform: none;
+}
+.mi-personaje-rpg .mi-acciones-principales .mi-ver-como {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  width: min(var(--mp-vista-ancho), 95%);
+  min-height: var(--mp-vista-alto);
+  padding: 10px 20px;
+  font-family: var(--mp-vista-fuente);
+  font-size: var(--mp-vista-tamano-texto);
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--mp-vista-color-texto);
+  background-color: var(--mp-vista-fondo);
+  border: var(--mp-vista-borde);
+  transform: translate(var(--mp-vista-x), var(--mp-vista-y)) scale(var(--mp-vista-escala)) rotate(var(--mp-vista-rotacion));
+  cursor: pointer;
+  white-space: normal;
+  transition: filter 150ms ease;
+}
+.mi-personaje-rpg .mi-acciones-principales .mi-ver-como:hover {
+  filter: brightness(1.2);
+}
+
+/* ============================================================
+   PANEL FINAL — AGREGAR ALGO QUE DIGO
+   Puedes ajustar independientemente este botón.
+   ============================================================ */
+.mi-personaje-rpg {
+  --mp-decir-x: 0px;
+  --mp-decir-y: 0px;
+  --mp-decir-ancho: 310px;
+  --mp-decir-alto: 64px;
+  --mp-decir-escala: 1;
+  --mp-decir-rotacion: 0deg;
+  --mp-decir-fuente: Georgia, "Times New Roman", serif;
+  --mp-decir-tamano-texto: 16px;
+  --mp-decir-color-texto: #ffe7b6;
+  --mp-decir-fondo: transparent;
+  --mp-botones-separacion: 14px;
+}
+.mi-personaje-rpg .mi-acciones-principales {
+  gap: var(--mp-botones-separacion);
+  flex-wrap: wrap;
+}
+.mi-personaje-rpg .mi-acciones-principales .mi-decir-principal {
+  box-sizing: border-box;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: min(var(--mp-decir-ancho), 95%);
+  min-height: var(--mp-decir-alto);
+  padding: 10px 20px;
+  font-family: var(--mp-decir-fuente);
+  font-size: var(--mp-decir-tamano-texto);
+  font-weight: bold;
+  color: var(--mp-decir-color-texto);
+  background-color: var(--mp-decir-fondo);
+  transform: translate(var(--mp-decir-x), var(--mp-decir-y)) scale(var(--mp-decir-escala)) rotate(var(--mp-decir-rotacion));
+  cursor: pointer;
+}
+
+/* =====================================================
+   PANEL DE PERSONALIZACIÓN — NOMBRE Y ROL
+   ===================================================== */
+
+:root {
+  /* NOMBRE DEL PERSONAJE (Kano, Ruoye, etc.) */
+  --mp-nombre-x: 0px;
+  --mp-nombre-y: -50px;
+  --mp-nombre-tamano: 64px;
+  --mp-nombre-color: #ffe2a0;
+  --mp-nombre-escala: 1;
+
+  /* ROL DEL PERSONAJE (Músico, Dibujante, etc.) */
+  --mp-rol-x: 0px;
+  --mp-rol-y: -50px;
+  --mp-rol-tamano: 19px;
+  --mp-rol-color: #f5d6a0;
+  --mp-rol-escala: 1;
+}
+
+/* NOMBRE */
+.mp-nombre {
+  position: relative;
+  left: var(--mp-nombre-x);
+  top: var(--mp-nombre-y);
+  font-size: var(--mp-nombre-tamano);
+  color: var(--mp-nombre-color);
+  transform: scale(var(--mp-nombre-escala));
+}
+
+/* ROL */
+.mp-rol {
+  position: relative;
+  left: var(--mp-rol-x);
+  top: var(--mp-rol-y);
+  font-size: var(--mp-rol-tamano);
+  color: var(--mp-rol-color);
+  transform: scale(var(--mp-rol-escala));
+}
+
+/* ================================================================
+   PANEL FINAL — TEXTO DEL PERGAMINO (NOMBRE + ROL)
+   ================================================================
+   Estas reglas apuntan al JSX ACTUAL: .mi-encabezado h1 / p.
+   No es necesario cambiar MiPersonaje.jsx.
+   Valores positivos de X = derecha; positivos de Y = abajo.
+   ================================================================ */
+.mi-personaje-rpg {
+  /* MOVER NOMBRE Y ROL JUNTOS (sin mover el pergamino) */
+  --mp-titulo-grupo-x: 0px;
+  --mp-titulo-grupo-y: 0px;
+
+  /* NOMBRE (Kano, Ruoye, etc.) */
+  --mp-titulo-nombre-x: 0px;
+  --mp-titulo-nombre-y: -30px;
+  --mp-titulo-nombre-tamano: 64px;
+  --mp-titulo-nombre-color: #ffe2a0;
+  --mp-titulo-nombre-tipografia: Georgia, "Times New Roman", serif;
+  --mp-titulo-nombre-escala: 1;
+  --mp-titulo-nombre-giro: 0deg;
+  --mp-titulo-nombre-sombra: 0 4px 12px #0009;
+
+  /* ROL (Músico, Dibujante, etc.) */
+  --mp-titulo-rol-x: 0px;
+  --mp-titulo-rol-y: -35px;
+  --mp-titulo-rol-tamano: 19px;
+  --mp-titulo-rol-color: #332d28;
+  --mp-titulo-rol-tipografia: Georgia, "Times New Roman", serif;
+  --mp-titulo-rol-escala: 1;
+  --mp-titulo-rol-giro: 0deg;
+  --mp-titulo-rol-sombra: 0 2px 5px #0009;
+
+  /* ESPACIO ENTRE AMBOS TEXTOS */
+  --mp-titulo-rol-margen-superior: 8px;
+}
+
+/* Se mueve el bloque de texto completo, no el pergamino. */
+.mi-personaje-rpg .mi-encabezado {
+  translate: var(--mp-titulo-grupo-x) var(--mp-titulo-grupo-y);
+}
+
+/* Selectores REALES del MiPersonaje.jsx que enviaste. */
+.mi-personaje-rpg .mi-encabezado h1 {
+  position: relative;
+  margin-top: 7px;
+  font-size: var(--mp-titulo-nombre-tamano);
+  color: var(--mp-titulo-nombre-color);
+  font-family: var(--mp-titulo-nombre-tipografia);
+  text-shadow: var(--mp-titulo-nombre-sombra);
+  transform: translate(var(--mp-titulo-nombre-x), var(--mp-titulo-nombre-y))
+             scale(var(--mp-titulo-nombre-escala))
+             rotate(var(--mp-titulo-nombre-giro));
+}
+
+.mi-personaje-rpg .mi-encabezado p {
+  position: relative;
+  margin-top: var(--mp-titulo-rol-margen-superior);
+  font-size: var(--mp-titulo-rol-tamano);
+  color: var(--mp-titulo-rol-color);
+  font-family: var(--mp-titulo-rol-tipografia);
+  text-shadow: var(--mp-titulo-rol-sombra);
+  transform: translate(var(--mp-titulo-rol-x), var(--mp-titulo-rol-y))
+             scale(var(--mp-titulo-rol-escala))
+             rotate(var(--mp-titulo-rol-giro));
+}

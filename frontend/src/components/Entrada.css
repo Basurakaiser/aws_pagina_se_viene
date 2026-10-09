@@ -1,0 +1,250 @@
+/* ENTRADA CON DOS SPRITES: cerrada -> abierta */
+.entrada-escenario {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    background: #000;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+}
+
+.entrada-contenedor-puerta {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transform-origin: 50% 50%;
+}
+
+.entrada-fondo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+.entrada-area-colision {
+    position: absolute;
+    left: var(--entrada-click-x);
+    top: var(--entrada-click-y);
+    width: var(--entrada-click-ancho);
+    height: var(--entrada-click-alto);
+    padding: 0;
+    border: var(--entrada-click-borde);
+    background: var(--entrada-click-fondo);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.entrada-area-colision:disabled { cursor: default; }
+.entrada-area-colision:focus-visible { outline: 3px solid #ffcc73; outline-offset: 2px; }
+
+.entrada-escenario.entrando .entrada-contenedor-puerta {
+    animation: entrada-acercarse var(--entrada-duracion-total) ease-in forwards;
+}
+@keyframes entrada-acercarse {
+    0%, 28% { transform: scale(1); }
+    100% { transform: scale(var(--entrada-zoom)); }
+}
+
+.entrada-fundido {
+    position: absolute;
+    inset: 0;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+.entrada-escenario.entrando .entrada-fundido {
+    animation: entrada-oscurecer var(--entrada-duracion-total) ease-in forwards;
+}
+@keyframes entrada-oscurecer {
+    0%, 45% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* =========================================
+   SELECTOR PROVISIONAL DE AVENTUREROS
+========================================= */
+
+.entrada-selector-fondo {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(5px);
+
+    z-index: 1000;
+
+    animation: entrada-selector-aparecer 0.25s ease-out;
+}
+
+.entrada-selector-panel {
+    width: min(440px, 90vw);
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #30251b,
+            #17110d
+        );
+
+    border: 2px solid #9b713c;
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 35px rgba(0, 0, 0, 0.8),
+        inset 0 0 25px rgba(0, 0, 0, 0.4);
+
+    color: #f0d8aa;
+    text-align: center;
+}
+
+.entrada-selector-panel h2 {
+    margin: 0 0 10px;
+
+    font-family: Georgia, serif;
+    font-size: 25px;
+
+    color: #f5d69d;
+}
+
+.entrada-selector-panel p {
+    margin-bottom: 22px;
+
+    font-size: 14px;
+    color: #b8a38b;
+}
+
+/* LISTA DE USUARIOS */
+
+.entrada-selector-usuarios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.entrada-selector-usuario {
+    padding: 13px 10px;
+
+    background: #332519;
+    border: 1px solid #725332;
+    border-radius: 5px;
+
+    color: #d7bc93;
+    font-family: Georgia, serif;
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        transform 0.2s;
+}
+
+.entrada-selector-usuario:hover {
+    background: #49331f;
+    border-color: #d5a65c;
+
+    transform: translateY(-2px);
+}
+
+.entrada-selector-usuario.seleccionado {
+    background: #65421f;
+    border-color: #f1bd69;
+
+    color: #ffe0a0;
+
+    box-shadow: 0 0 12px rgba(255, 170, 55, 0.25);
+}
+
+/* CONFIRMAR */
+
+.entrada-selector-confirmar {
+    width: 100%;
+
+    padding: 14px;
+
+    background: linear-gradient(
+        180deg,
+        #9b713b,
+        #65401c
+    );
+
+    border: 1px solid #d4a461;
+    border-radius: 5px;
+
+    color: #fff0cc;
+    font-family: Georgia, serif;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: filter 0.2s;
+}
+
+.entrada-selector-confirmar:hover {
+    filter: brightness(1.2);
+}
+
+/* CANCELAR */
+
+.entrada-selector-cancelar {
+    margin-top: 14px;
+
+    background: transparent;
+    border: none;
+
+    color: #a9947c;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.entrada-selector-cancelar:hover {
+    color: #f5d69d;
+}
+
+/* APARICIÓN */
+
+@keyframes entrada-selector-aparecer {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+/* =============================================================
+   PANEL DE AJUSTES - MODIFICA SOLO ESTOS VALORES
+   Coordenadas relativas a la imagen mostrada (porcentajes).
+   Si cambias la duracion, ajusta tambien los 1150 ms de Entrada.jsx.
+   ============================================================= */
+.entrada-escenario {
+    --entrada-click-x: 39%;
+    --entrada-click-y: 21%;
+    --entrada-click-ancho: 23%;
+    --entrada-click-alto: 66%;
+    --entrada-click-fondo: transparent; /* rgba(255,0,0,.35) para depurar */
+    --entrada-click-borde: 0px solid transparent; /* 2px solid red para depurar */
+    --entrada-zoom: 1.13;
+    --entrada-duracion-total: 1.15s;
+}

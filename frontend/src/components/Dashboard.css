@@ -1,0 +1,529 @@
+/* =====================================================
+   DASHBOARD
+   ===================================================== */
+
+.dashboard {
+    position: absolute;
+    left: 53%;
+    top: -7%;
+    width: 47%;
+    max-width: 1000px;
+    aspect-ratio: 0.82;
+    z-index: 12;
+
+    transform:
+        translate3d(
+            var(--mouse-x),
+            var(--mouse-y),
+            0
+        )
+        perspective(1200px)
+        rotateX(2deg)
+        rotateY(-10deg)
+        rotateZ(-1deg);
+
+    transform-origin: center center;
+
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   PAPEL
+   ===================================================== */
+
+.dashboard-papel {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    pointer-events: none;
+    user-select: none;
+
+    filter:
+        drop-shadow(
+            0 12px 10px rgba(0, 0, 0, 0.38)
+        );
+}
+
+
+/* =====================================================
+   CONTENIDO
+   ===================================================== */
+
+.dashboard-contenido {
+    position: absolute;
+
+    top: 27%;
+    left: 5%;
+    right: 11%;
+    bottom: 30%;
+
+    display: flex;
+    flex-direction: column;
+
+    color: #382514;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    transform:
+        perspective(1300px)
+        rotateX(1deg)
+        rotateY(-10deg)
+        rotateZ(-0.2deg);
+
+    transform-origin: center center;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   CABECERA
+   ===================================================== */
+
+.dashboard-cabecera {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding: 0 1%;
+
+    box-sizing: border-box;
+}
+
+.dashboard-etapa {
+    font-size: clamp(22px, 2vw, 34px);
+    font-weight: 800;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dashboard-progreso-general {
+    font-size: clamp(25px, 2.3vw, 39px);
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+
+/* =====================================================
+   LÍNEA BAJO LA CABECERA
+   ===================================================== */
+
+.dashboard-linea-cabecera {
+    width: 100%;
+    height: 3px;
+
+    margin-top: 9px;
+    margin-bottom: 13px;
+
+    flex-shrink: 0;
+
+    background:
+        rgba(62, 39, 18, 0.82);
+
+    transform:
+        rotate(-0.3deg);
+}
+
+
+/* =====================================================
+   CATEGORÍAS
+   ===================================================== */
+
+.dashboard-categorias {
+    display: flex;
+
+    flex: 1;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    min-height: 0;
+}
+
+
+/* =====================================================
+   FILA DE CATEGORÍA
+   ===================================================== */
+
+.dashboard-categoria {
+    display: grid;
+
+    grid-template-columns:
+        44px
+        minmax(125px, 1.2fr)
+        minmax(150px, 2fr)
+        48px;
+
+    align-items: center;
+
+    column-gap: 9px;
+
+    width: 100%;
+}
+
+
+/* =====================================================
+   LOGO
+   ===================================================== */
+
+.dashboard-logo-contenedor {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+}
+
+.dashboard-logo {
+    display: block;
+
+    width: 40px;
+    height: 40px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            1px 2px 1px rgba(45, 25, 8, 0.22)
+        );
+}
+
+
+/* =====================================================
+   NOMBRE
+   ===================================================== */
+
+.dashboard-categoria-nombre {
+    min-width: 0;
+
+    font-size: clamp(
+        11px,
+        0.95vw,
+        17px
+    );
+
+    font-weight: 700;
+
+    line-height: 1.05;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   BARRA
+   ===================================================== */
+
+.dashboard-barra-categoria {
+    position: relative;
+
+    width: 100%;
+    height: 19px;
+
+    overflow: hidden;
+
+    border:
+        2px solid
+        rgba(62, 39, 18, 0.76);
+
+    border-radius: 12px;
+
+    box-sizing: border-box;
+
+    background:
+        rgba(95, 56, 22, 0.08);
+
+    box-shadow:
+        inset
+        0 1px 2px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+/* =====================================================
+   RELLENO
+   ===================================================== */
+
+.dashboard-barra-categoria-relleno {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 0;
+    height: 100%;
+
+    border-radius: 9px;
+
+    transition:
+        width 500ms ease;
+
+    box-shadow:
+        inset
+        0 1px 0
+        rgba(255, 255, 255, 0.2),
+
+        inset
+        0 -2px 0
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* =====================================================
+   TEXTURA DE LAS BARRAS
+   ===================================================== */
+
+.dashboard-barra-categoria-relleno::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.25;
+
+    background:
+        repeating-linear-gradient(
+            -18deg,
+            transparent 0,
+            transparent 5px,
+            rgba(45, 20, 10, 0.45) 6px,
+            transparent 7px,
+            transparent 11px
+        );
+}
+
+
+/* =====================================================
+   COLORES POR CATEGORÍA
+   ===================================================== */
+
+.dashboard-color-rojo {
+    background:
+        linear-gradient(
+            90deg,
+            #d7473f,
+            #e65b50
+        );
+}
+
+.dashboard-color-morado {
+    background:
+        linear-gradient(
+            90deg,
+            #963db4,
+            #b44dcc
+        );
+}
+
+.dashboard-color-amarillo {
+    background:
+        linear-gradient(
+            90deg,
+            #c99810,
+            #e1b824
+        );
+}
+
+.dashboard-color-azul {
+    background:
+        linear-gradient(
+            90deg,
+            #1767d1,
+            #2f7deb
+        );
+}
+
+.dashboard-color-verde {
+    background:
+        linear-gradient(
+            90deg,
+            #439a2e,
+            #60b943
+        );
+}
+
+.dashboard-color-naranjo {
+    background:
+        linear-gradient(
+            90deg,
+            #ce5c19,
+            #e87927
+        );
+}
+
+.dashboard-color-magenta {
+    background:
+        linear-gradient(
+            90deg,
+            #942478,
+            #bd339c
+        );
+}
+
+
+/* =====================================================
+   DATOS DE LA CATEGORÍA
+   ===================================================== */
+
+.dashboard-categoria-datos {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+    justify-content: center;
+
+    min-width: 0;
+
+    line-height: 1;
+}
+
+.dashboard-categoria-porcentaje {
+    font-size: clamp(
+        13px,
+        1.15vw,
+        20px
+    );
+
+    font-weight: 900;
+}
+
+.dashboard-categoria-misiones {
+    margin-top: 3px;
+
+    font-size: clamp(
+        9px,
+        0.7vw,
+        12px
+    );
+
+    font-weight: 700;
+
+    opacity: 0.8;
+}
+
+
+/* =====================================================
+   MENSAJES
+   ===================================================== */
+
+.dashboard-mensaje {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 80%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #382514;
+
+    font-size: clamp(
+        16px,
+        1.4vw,
+        23px
+    );
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+.dashboard-error {
+    color: #6b241c;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1250px) {
+    .dashboard {
+        width: 44%;
+    }
+
+    .dashboard-contenido {
+        left: 11%;
+        right: 11%;
+    }
+
+    .dashboard-categoria {
+        grid-template-columns:
+            38px
+            minmax(105px, 1.2fr)
+            minmax(120px, 2fr)
+            42px;
+
+        column-gap: 7px;
+    }
+
+    .dashboard-logo-contenedor {
+        width: 38px;
+        height: 38px;
+    }
+
+    .dashboard-logo {
+        width: 35px;
+        height: 35px;
+    }
+
+    .dashboard-barra-categoria {
+        height: 17px;
+    }
+}
+
+
+@media (max-width: 800px) {
+    .dashboard {
+        left: 50%;
+        width: 48%;
+    }
+
+    .dashboard-categoria {
+        grid-template-columns:
+            30px
+            minmax(80px, 1.2fr)
+            minmax(90px, 2fr)
+            36px;
+
+        column-gap: 5px;
+    }
+
+    .dashboard-logo-contenedor {
+        width: 30px;
+        height: 30px;
+    }
+
+    .dashboard-logo {
+        width: 28px;
+        height: 28px;
+    }
+
+    .dashboard-barra-categoria {
+        height: 14px;
+    }
+}

@@ -1,0 +1,472 @@
+/* =====================================================
+   PODIO
+   ===================================================== */
+
+.podio {
+    position: absolute;
+    left: 3%;
+    top: 7%;
+    width: 49%;
+    height: 82%;
+    z-index: 11;
+
+    transform:
+        translate3d(
+            var(--mouse-x),
+            var(--mouse-y),
+            0
+        )
+        perspective(1200px)
+        rotateX(1deg)
+        rotateY(7deg)
+        rotateZ(0.4deg);
+
+    transform-origin: center center;
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+
+    pointer-events: none;
+    user-select: none;
+}
+
+.podio-contenido {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* =====================================================
+   DISTRIBUCIÓN
+   ===================================================== */
+
+.podio-grid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* =====================================================
+   TARJETAS
+   ===================================================== */
+
+.podio-tarjeta {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 21%;
+
+    transform-origin: center center;
+
+    filter:
+        drop-shadow(
+            0 8px 7px
+            rgba(0, 0, 0, 0.5)
+        );
+}
+
+
+/* =====================================================
+   PRIMER PUESTO
+   ===================================================== */
+
+.podio-puesto-1 {
+    left: 39%;
+    top: 1%;
+
+    width: 25%;
+
+    z-index: 20;
+
+    transform: rotate(-1deg);
+}
+
+
+/* =====================================================
+   SEGUNDO PUESTO
+   ===================================================== */
+
+.podio-puesto-2 {
+    left: 67%;
+    top: 13%;
+
+    width: 22%;
+
+    z-index: 17;
+
+    transform: rotate(3deg);
+}
+
+
+/* =====================================================
+   TERCER PUESTO
+   ===================================================== */
+
+.podio-puesto-3 {
+    left: 10%;
+    top: 16%;
+
+    width: 22%;
+
+    z-index: 16;
+
+    transform: rotate(-4deg);
+}
+
+
+/* =====================================================
+   CUARTO PUESTO
+   ===================================================== */
+
+.podio-puesto-4 {
+    left: 57%;
+    top: 51%;
+
+    width: 20%;
+
+    z-index: 13;
+
+    transform: rotate(2deg);
+}
+
+
+/* =====================================================
+   QUINTO PUESTO
+   ===================================================== */
+
+.podio-puesto-5 {
+    left: 5%;
+    top: 52%;
+
+    width: 20%;
+
+    z-index: 12;
+
+    transform: rotate(-2.5deg);
+}
+
+
+/* =====================================================
+   SEXTO PUESTO
+   ===================================================== */
+
+.podio-puesto-6 {
+    left: 29%;
+    top: 59%;
+
+    width: 19%;
+
+    z-index: 11;
+
+    transform: rotate(1.5deg);
+}
+
+
+/* =====================================================
+   SÉPTIMO PUESTO
+   ===================================================== */
+
+.podio-puesto-7 {
+    left: 79%;
+    top: 55%;
+
+    width: 18%;
+
+    z-index: 10;
+
+    transform: rotate(-3deg);
+}
+
+
+/* =====================================================
+   POSTER
+   ===================================================== */
+
+.podio-poster-contenedor {
+    position: relative;
+    width: 100%;
+}
+
+.podio-poster {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   NOMBRE
+   ===================================================== */
+
+.podio-nombre {
+    position: relative;
+
+    margin-bottom: -3px;
+
+    color: #e4bd70;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(
+        12px,
+        1.1vw,
+        21px
+    );
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    text-shadow:
+        0 2px 2px #1b0d04,
+        1px 0 #1b0d04,
+        -1px 0 #1b0d04,
+        0 -1px #1b0d04;
+
+    z-index: 5;
+}
+
+
+/* =====================================================
+   PUNTOS
+   ===================================================== */
+
+.podio-puntos {
+    position: relative;
+
+    margin-top: -4px;
+
+    color: #f0cf83;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(
+        12px,
+        1.15vw,
+        22px
+    );
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    text-shadow:
+        0 2px 2px #1b0d04,
+        1px 0 #1b0d04,
+        -1px 0 #1b0d04;
+
+    z-index: 5;
+}
+
+.podio-puntos span {
+    font-size: 0.72em;
+}
+
+
+/* =====================================================
+   MEDALLA DE POSICIÓN
+   ===================================================== */
+
+.podio-medalla {
+    position: absolute;
+
+    left: -6%;
+    top: -4%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: 3px solid #4b260d;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffd96b,
+            #c27616 65%,
+            #6c350c
+        );
+
+    color: #301707;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 18px;
+    font-weight: 900;
+
+    box-shadow:
+        0 3px 5px
+        rgba(0, 0, 0, 0.55);
+
+    z-index: 8;
+}
+
+
+/* =====================================================
+   COLORES TOP 3
+   ===================================================== */
+
+.podio-puesto-1 .podio-medalla {
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff0a0,
+            #e4a91e 58%,
+            #8b4b0b
+        );
+}
+
+.podio-puesto-2 .podio-medalla {
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #f1f1e7,
+            #aaa99e 60%,
+            #5f5d56
+        );
+}
+
+.podio-puesto-3 .podio-medalla {
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #e8a35e,
+            #a95825 60%,
+            #653016
+        );
+}
+
+
+/* =====================================================
+   CORONA
+   ===================================================== */
+
+.podio-corona {
+    position: absolute;
+
+    left: 50%;
+    top: -16%;
+
+    transform:
+        translateX(-50%)
+        rotate(3deg);
+
+    color: #ffd43b;
+
+    font-size: clamp(
+        28px,
+        3vw,
+        52px
+    );
+
+    line-height: 1;
+
+    text-shadow:
+        0 3px 0 #7d3c09,
+        0 5px 7px
+        rgba(0, 0, 0, 0.6);
+
+    z-index: 9;
+}
+
+
+/* =====================================================
+   MENSAJES
+   ===================================================== */
+
+.podio-mensaje {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #e3bd72;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    text-shadow:
+        0 2px 3px #000;
+
+    white-space: nowrap;
+}
+
+.podio-error {
+    color: #d77c62;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1250px) {
+    .podio {
+        left: 2%;
+        width: 51%;
+    }
+
+    .podio-medalla {
+        width: 29px;
+        height: 29px;
+
+        border-width: 2px;
+
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 800px) {
+    .podio {
+        left: 1%;
+        width: 53%;
+    }
+
+    .podio-medalla {
+        width: 24px;
+        height: 24px;
+
+        font-size: 12px;
+    }
+
+    .podio-nombre {
+        font-size: 10px;
+    }
+
+    .podio-puntos {
+        font-size: 10px;
+    }
+}
