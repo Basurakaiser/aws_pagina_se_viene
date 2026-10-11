@@ -304,19 +304,60 @@ class Mision(models.Model):
         verbose_name="Puntos"
     )
 
+    # Los puntos determinan la rareza; el diseño se sortea una sola vez.
+    PERGAMINOS_POR_PUNTOS = {
+        1: ('1', '2', '3', '4', '5', '6'),
+        2: ('1', '2', '3', '4', '5', '6'),
+        3: ('1_plata', '2_plata', '3_plata'),
+        5: ('1_plata', '2_plata', '3_plata'),
+        8: ('1_oro', '2_oro'),
+        13: ('1_diamante',),
+        21: ('1_morado',),
+        34: ('1_dragon',),
+    }
+
     PERGAMINO_CHOICES = [
-        (
-            i,
-            f'Pergamino {i}'
+        (nombre, nombre.replace('_', ' ').title())
+        for nombre in (
+            '1', '2', '3', '4', '5', '6',
+            '1_plata', '2_plata', '3_plata',
+            '1_oro', '2_oro', '1_diamante',
+            '1_morado', '1_dragon',
         )
-        for i in range(1, 7)
     ]
 
-    numero_pergamino = models.IntegerField(
+    numero_pergamino = models.CharField(
+        max_length=30,
         choices=PERGAMINO_CHOICES,
-        default=1,
-        verbose_name="Número de Pergamino (PNG)"
+        default='1',
+        verbose_name="Diseño de pergamino"
     )
+
+    def save(self, *args, **kwargs):
+        import random
+
+        opciones = self.PERGAMINOS_POR_PUNTOS.get(self.recompensa_puntos)
+        if not opciones:
+            raise ValidationError({
+                'recompensa_puntos': 'Usa 1, 2, 3, 5, 8, 13, 21 o 34 puntos.'
+            })
+
+        # Mantener el mismo diseño mientras no cambie la recompensa.
+        if self._state.adding:
+            self.numero_pergamino = random.choice(opciones)
+        else:
+            anterior = type(self).objects.filter(pk=self.pk).values(
+                'recompensa_puntos', 'numero_pergamino'
+            ).first()
+            if anterior and anterior['recompensa_puntos'] != self.recompensa_puntos:
+                self.numero_pergamino = random.choice(opciones)
+            elif str(self.numero_pergamino) not in opciones:
+                self.numero_pergamino = random.choice(opciones)
+
+        if kwargs.get('update_fields') is not None:
+            kwargs['update_fields'] = set(kwargs['update_fields']) | {'numero_pergamino'}
+
+        super().save(*args, **kwargs)
 
     fecha_tomada = models.DateTimeField(
         null=True,

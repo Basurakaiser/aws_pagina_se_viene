@@ -2173,3 +2173,22 @@
         padding: 0;
     }
 }
+
+
+/* =====================================================
+   ARCHIVOS: BRILLO SEGÚN RAREZA
+   No altera posiciones, tamaños ni la animación de fuego.
+   ===================================================== */
+.npc-archivo-pergamino[data-pergamino*="plata"] { --archivo-brillo: rgba(190, 205, 225, .55); }
+.npc-archivo-pergamino[data-pergamino*="oro"] { --archivo-brillo: rgba(255, 192, 35, .60); }
+.npc-archivo-pergamino[data-pergamino*="diamante"] { --archivo-brillo: rgba(80, 205, 255, .65); }
+.npc-archivo-pergamino[data-pergamino*="morado"] { --archivo-brillo: rgba(172, 75, 255, .65); }
+.npc-archivo-pergamino[data-pergamino*="dragon"] { --archivo-brillo: rgba(255, 50, 35, .70); }
+
+.npc-archivo-pergamino[data-pergamino*="plata"]:hover,
+.npc-archivo-pergamino[data-pergamino*="oro"]:hover,
+.npc-archivo-pergamino[data-pergamino*="diamante"]:hover,
+.npc-archivo-pergamino[data-pergamino*="morado"]:hover,
+.npc-archivo-pergamino[data-pergamino*="dragon"]:hover {
+    filter: drop-shadow(0 0 12px var(--archivo-brillo)) drop-shadow(0 7px 7px rgba(0, 0, 0, .48));
+}

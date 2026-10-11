@@ -1019,3 +1019,42 @@ body {
         animation-duration: 200ms;
     }
 }
+
+/* ============================================================
+   SOLO PERGAMINO 1_DRAGON: POSICIÓN DE LOS TEXTOS
+   No modifica tamaño, posición ni perspectiva del pergamino.
+   ============================================================ */
+.quest-pergamino-dragon .quest-datos {
+    top: 28%;
+    left: 12%;
+    width: 76%;
+    height: 52%;
+}
+
+.quest-pergamino-dragon .quest-categoria {
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.quest-pergamino-dragon .quest-descripcion {
+    padding: 0 8px;
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.quest-pergamino-dragon .quest-datos-inferiores {
+    padding-bottom: 0;
+    gap: 5px;
+}
+
+.quest-pergamino-dragon .quest-prioridad {
+    font-size: 16px;
+}
+
+.quest-pergamino-dragon .quest-recompensa {
+    font-size: 18px;
+}
+
+.quest-pergamino-dragon .quest-roles {
+    font-size: 14px;
+}

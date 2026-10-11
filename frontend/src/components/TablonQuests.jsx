@@ -201,10 +201,10 @@ function TablonQuests({ cambiarPantalla, usuarioActivo }) {
             etc.
         */
 
-        const numero =
-            Number(mision?.numero_pergamino) || 1;
+        const diseno = String(mision?.numero_pergamino || '1');
 
-        return `/recursos/imagenes/quest/${numero}.png`;
+        // El servidor guarda el diseño elegido para esta quest.
+        return `/recursos/imagenes/quest/${encodeURIComponent(diseno)}.png`;
     };
 
 
@@ -354,6 +354,8 @@ function TablonQuests({ cambiarPantalla, usuarioActivo }) {
                                             : ""
                                     }`
                                 }
+
+                                data-pergamino={String(mision.numero_pergamino || "1").toLowerCase()}
 
                                 style={{
                                     "--rotacion":

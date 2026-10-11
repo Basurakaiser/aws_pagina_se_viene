@@ -317,8 +317,19 @@ function obtenerEnlacePreviewDrive(valor) {
 }
 
 function obtenerPergamino(mision) {
-    const numero = Number(mision?.numero_pergamino);
-    return Number.isInteger(numero) && numero >= 1 && numero <= 6 ? numero : 1;
+    const valor = String(mision?.numero_pergamino ?? "").trim().toLowerCase();
+    // Respetar el diseño asignado en Django, incluyendo las variantes de rareza.
+    if (/^[1-6](?:_(?:plata|oro|diamante|morado|dragon))?$/.test(valor)) {
+        return valor;
+    }
+    // Compatibilidad con misiones antiguas sin numero_pergamino válido.
+    const puntos = Number(mision?.recompensa_puntos);
+    if (puntos >= 34) return "1_dragon";
+    if (puntos >= 21) return "1_morado";
+    if (puntos >= 13) return "1_diamante";
+    if (puntos >= 8) return "1_oro";
+    if (puntos >= 3) return "1_plata";
+    return "1";
 }
 
 function NPC({ personaje, usuarioActivo, volver }) {
@@ -1096,7 +1107,7 @@ function NPC({ personaje, usuarioActivo, volver }) {
                                         );
 
                                         return (
-                                            <article key={mision.id} className="npc-archivo-pergamino">
+                                            <article key={mision.id} className="npc-archivo-pergamino" data-pergamino={numeroPergamino}>
                                                 <img
                                                     src={`/recursos/imagenes/quest/${numeroPergamino}.png`}
                                                     className="npc-archivo-pergamino-fondo"
