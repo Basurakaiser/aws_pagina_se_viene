@@ -1,3 +1,4 @@
+
 /* =====================================================
    TABLÓN DE QUESTS
    ===================================================== */
@@ -124,6 +125,7 @@
         filter 0.2s ease;
     will-change: transform;
     backface-visibility: hidden;
+    --brillo-quest: 255, 153, 0;
 }
 
 
@@ -134,10 +136,7 @@
 .tablon-pergamino.seleccionada {
     z-index: 100;
     transform: rotate(0deg) scale(1.07);
-    filter: drop-shadow(
-        0 0 25px
-        rgba(255, 215, 0, 0.9)
-    );
+    /* El brillo se aplica a la silueta del PNG, no al contenedor. */
 }
 
 .tablon-pergamino.seleccionada:hover {
@@ -166,21 +165,42 @@
 
 
 /* =====================================================
-   HOVER
+   BRILLO SEGÚN RAREZA (HOVER Y SELECCIÓN)
    ===================================================== */
 
-.tablon-pergamino:hover .tablon-imagen-pergamino {
-    filter: drop-shadow(
-        0 0 35px
-        rgba(255, 153, 0, 0.7)
-    );
+.tablon-pergamino[data-pergamino*="plata"] {
+    --brillo-quest: 205, 220, 235;
 }
 
-.tablon-pergamino.seleccionada .tablon-imagen-pergamino {
-    filter: drop-shadow(
-        0 0 45px
-        rgba(255, 200, 0, 0.9)
-    );
+.tablon-pergamino[data-pergamino*="oro"] {
+    --brillo-quest: 255, 195, 45;
+}
+
+.tablon-pergamino[data-pergamino*="diamante"] {
+    --brillo-quest: 90, 215, 255;
+}
+
+.tablon-pergamino[data-pergamino*="morado"] {
+    --brillo-quest: 180, 75, 255;
+}
+
+.tablon-pergamino[data-pergamino*="dragon"] {
+    --brillo-quest: 255, 55, 45;
+}
+
+.tablon-pergamino:hover .tablon-imagen-pergamino {
+    filter:
+        drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5))
+        drop-shadow(0 0 19px rgba(var(--brillo-quest), 0.8))
+        drop-shadow(0 0 30px rgba(var(--brillo-quest), 0.4));
+}
+
+.tablon-pergamino.seleccionada .tablon-imagen-pergamino,
+.tablon-pergamino.seleccionada:hover .tablon-imagen-pergamino {
+    filter:
+        drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5))
+        drop-shadow(0 0 23px rgba(var(--brillo-quest), 0.95))
+        drop-shadow(0 0 42px rgba(var(--brillo-quest), 0.65));
 }
 
 
@@ -190,16 +210,19 @@
 
 .tablon-datos-mision {
     position: absolute;
-    top: 28%;
-    left: 5%;
-    width: 90%;
-    height: 65%;
+    top: 29%;
+    left: 13%;
+    width: 74%;
+    height: 56%;
     z-index: 10;
+
     display: flex;
     flex-direction: column;
-    color: #2c3e50;
+
+    color: #302319;
     text-align: center;
     pointer-events: none;
+    box-sizing: border-box;
 }
 
 
@@ -208,10 +231,13 @@
    ===================================================== */
 
 .tablon-categoria {
-    margin-top: -60px;
-    font-size: 18px;
+    margin: 0;
+    padding: 0 5px;
+
+    font-size: 17px;
     font-style: italic;
-    color: #555;
+    color: #574230;
+    line-height: 1.2;
 }
 
 
@@ -221,14 +247,24 @@
 
 .tablon-descripcion {
     width: 100%;
-    margin-top: 45px;
-    padding: 10px 15px;
-    font-size: 42px;
-    font-weight: 500;
-    line-height: 1.15;
+    max-height: 58%;
+    margin: 27px 0 12px;
+    padding: 0 8px;
+
+    font-size: clamp(19px, 2vw, 30px);
+    font-weight: 600;
+    line-height: 1.2;
+
     overflow-wrap: anywhere;
-    word-break: break-word;
+    word-break: normal;
+    overflow-y: auto;
+    scrollbar-width: none;
+
     box-sizing: border-box;
+}
+
+.tablon-descripcion::-webkit-scrollbar {
+    display: none;
 }
 
 
@@ -238,12 +274,14 @@
 
 .tablon-detalles {
     margin-top: auto;
-    padding-left: 30px;
-    padding-bottom: 40px;
+    padding: 0 4px 12px;
+
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 5px;
+
     text-align: left;
+    flex-shrink: 0;
 }
 
 
@@ -252,7 +290,8 @@
    ===================================================== */
 
 .tablon-prioridad {
-    font-size: 25px;
+    font-size: 21px;
+    line-height: 1.15;
 }
 
 
@@ -261,7 +300,8 @@
    ===================================================== */
 
 .tablon-recompensa {
-    font-size: 25px;
+    font-size: 21px;
+    line-height: 1.15;
 }
 
 
@@ -270,9 +310,11 @@
    ===================================================== */
 
 .tablon-roles {
-    font-size: 18px;
-    color: #4a5568;
+    font-size: 16px;
+    color: #584331;
     font-style: italic;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
 }
 
 

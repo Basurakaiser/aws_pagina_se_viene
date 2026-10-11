@@ -427,7 +427,7 @@ function QuestActiva({
         Number(mision.recompensa_puntos) || 0;
 
     const numeroPergamino =
-        Number(mision.numero_pergamino) || 1;
+        String(mision.numero_pergamino || "1");
 
 
     // =====================================================
@@ -447,7 +447,7 @@ function QuestActiva({
             </button>
 
 
-            <div className="quest-pergamino">
+            <div className={`quest-pergamino ${numeroPergamino === "1_dragon" ? "quest-pergamino-dragon" : ""}`}>
 
                 <img
                     src={`/recursos/imagenes/quest/${numeroPergamino}.png`}
