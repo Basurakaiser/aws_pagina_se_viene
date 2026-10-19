@@ -134,6 +134,8 @@ ROLES_POR_USUARIO = {
     'vicho': 'hibrido',
     'kano': 'musico',
     'walalan': 'escritor',
+    'skere': 'programador',
+    'firitoz': 'programador',
 }
 
 

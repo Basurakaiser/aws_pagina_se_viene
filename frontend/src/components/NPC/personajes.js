@@ -131,5 +131,25 @@ export const PERSONAJES = {
             { nombre: "Sistemas", tipo: "Programación" },
             { nombre: "Proyectos", tipo: "Desarrollo" }
         ]
+    },
+    skere: {
+        id: "skere",
+        nombre: "Martín Skerr",
+        rol: "Programador",
+        imagenTaberna: "/recursos/imagenes/personajes/skere1.webp",
+        imagenDialogo: "/recursos/imagenes/personajes/skere2.webp",
+        puntos: 0,
+        dialogos: ["¿Qué necesitas?", "Estoy revisando algunas tareas de programación."],
+        archivos: []
+    },
+    firitoz: {
+        id: "firitoz",
+        nombre: "Firitoz",
+        rol: "Programador",
+        imagenTaberna: "/recursos/imagenes/personajes/firitoz1.webp",
+        imagenDialogo: "/recursos/imagenes/personajes/firitoz2.webp",
+        puntos: 0,
+        dialogos: ["¡Buenas!", "Estoy trabajando en el código del gremio."],
+        archivos: []
     }
 };

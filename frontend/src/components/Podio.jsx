@@ -10,7 +10,9 @@ const IMAGENES = {
     ruoye: "/recursos/imagenes/podio/ruoye.png",
     vicho: "/recursos/imagenes/podio/vicho.png",
     vichosky: "/recursos/imagenes/podio/vicho.png",
-    walalan: "/recursos/imagenes/podio/walalan.png"
+    walalan: "/recursos/imagenes/podio/walalan.png",
+    skere: "/recursos/imagenes/podio/skere.png",
+    firitoz: "/recursos/imagenes/podio/firitoz.png"
 };
 
 const NOMBRES = {
@@ -21,7 +23,9 @@ const NOMBRES = {
     ruoye: "Ruoye",
     vicho: "Vichosky",
     vichosky: "Vichosky",
-    walalan: "Walalan"
+    walalan: "Walalan",
+    skere: "Skere",
+    firitoz: "Firitoz"
 };
 
 const ORDEN_FALLBACK = [
@@ -31,7 +35,9 @@ const ORDEN_FALLBACK = [
     "walalan",
     "vicho",
     "hisoka",
-    "lea"
+    "lea",
+    "skere",
+    "firitoz"
 ];
 
 function Podio() {
@@ -89,7 +95,8 @@ function Podio() {
 
             if (!id) return;
 
-            mapaRanking.set(id, persona);
+            const idCanonico = id === "vichosky" ? "vicho" : id;
+            mapaRanking.set(idCanonico, persona);
         });
 
         const todos = ORDEN_FALLBACK.map((id) => {
@@ -160,10 +167,9 @@ function Podio() {
                     return b.puntos - a.puntos;
                 }
 
-                return (
-                    ORDEN_FALLBACK.indexOf(a.id) -
-                    ORDEN_FALLBACK.indexOf(b.id)
-                );
+                const ia = ORDEN_FALLBACK.indexOf(a.id);
+                const ib = ORDEN_FALLBACK.indexOf(b.id);
+                return (ia < 0 ? Infinity : ia) - (ib < 0 ? Infinity : ib);
             })
             .map((persona, indice) => ({
                 ...persona,
@@ -176,7 +182,8 @@ function Podio() {
         if (posicion === 2) return "podio-puesto-2";
         if (posicion === 3) return "podio-puesto-3";
 
-        return `podio-puesto-${posicion}`;
+        // Los puestos inferiores se presentan consecutivamente en filas.
+        return "podio-puesto-inferior";
     };
 
     return (
@@ -199,6 +206,10 @@ function Podio() {
                         {participantes.map((persona) => (
                             <article
                                 key={persona.id}
+                                style={persona.posicion >= 4 ? {
+                                    "--puesto-columna": (persona.posicion - 4) % 3,
+                                    "--puesto-fila": Math.floor((persona.posicion - 4) / 3)
+                                } : undefined}
                                 className={`
                                     podio-tarjeta
                                     ${obtenerClasePosicion(
