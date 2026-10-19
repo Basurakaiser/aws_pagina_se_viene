@@ -21,8 +21,9 @@ const USUARIOS_TABERNA = [
     "walalan",
     "lea",
     "hisoka",
+    "skere",
+    "firitoz",
 ];
-
 function App() {
 
     const [pantalla, setPantalla] = useState("entrada");

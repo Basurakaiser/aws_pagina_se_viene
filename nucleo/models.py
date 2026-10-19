@@ -234,6 +234,8 @@ class Mision(models.Model):
         ('kaiser', 'Kaiser'),
         ('walalan', 'Walalan'),
         ('hisoka', 'Hisoka'),
+        ('skere', 'Skere'),
+        ('firitoz', 'Firitoz'),
         ('todos', 'Todos / Libre'),
     ]
 
@@ -524,6 +526,8 @@ class Publicacion(models.Model):
         ('kaiser', 'Kaiser'),
         ('walalan', 'Walalan'),
         ('hisoka', 'Hisoka'),
+        ('skere', 'Skere'),
+        ('firitoz', 'Firitoz'),
     ]
 
     autor = models.CharField(

@@ -110,6 +110,9 @@ function Taberna({
             "/recursos/imagenes/taberna2.webp",
 
             "/recursos/imagenes/taberna3.png",
+            "/recursos/imagenes/taberna4.png",
+            "/recursos/imagenes/personajes/skere1.webp",
+            "/recursos/imagenes/personajes/firitoz1.webp",
 
             "/recursos/imagenes/papeldash.png",
 
@@ -127,7 +130,9 @@ function Taberna({
 
             "/recursos/imagenes/podio/vichosky.png",
 
-            "/recursos/imagenes/podio/walalan.png"
+            "/recursos/imagenes/podio/walalan.png",
+                "/recursos/imagenes/podio/skere.png",
+                "/recursos/imagenes/podio/firitoz.png"
 
         ];
 
@@ -765,59 +770,21 @@ function Taberna({
 
 
 
-    const irDerecha = () => {
+    // Circuito horizontal: 3 ← 1 → 2. Desde la sala 2 se sube a la sala 4.
+    const irDerecha = () => {
+        if (salaActual === 3) cambiarSala(1, "derecha");
+        else if (salaActual === 1) cambiarSala(2, "derecha");
+    };
 
-        if (salaActual === 3) {
+    const irIzquierda = () => {
+        if (salaActual === 2) cambiarSala(1, "izquierda");
+        else if (salaActual === 1) cambiarSala(3, "izquierda");
+    };
 
-            cambiarSala(1, "derecha");
+    const subirEscalera = () => cambiarSala(4, "arriba");
+    const bajarEscalera = () => cambiarSala(2, "abajo");
 
-
-
-            return;
-
-        }
-
-
-
-        if (salaActual === 1) {
-
-            cambiarSala(2, "derecha");
-
-        }
-
-    };
-
-
-
-
-
-    const irIzquierda = () => {
-
-        if (salaActual === 2) {
-
-            cambiarSala(1, "izquierda");
-
-
-
-            return;
-
-        }
-
-
-
-        if (salaActual === 1) {
-
-            cambiarSala(3, "izquierda");
-
-        }
-
-    };
-
-
-
-
-
-    /* =====================================================
+    /* =====================================================
 
        VOLVER AL INICIO
 
@@ -1043,7 +1010,8 @@ function Taberna({
 
         2: "/recursos/imagenes/taberna2.webp",
 
-        3: "/recursos/imagenes/taberna3.png"
+        3: "/recursos/imagenes/taberna3.png",
+        4: "/recursos/imagenes/taberna4.png"
 
     };
 
@@ -1399,6 +1367,14 @@ function Taberna({
 
                 )}
 
+
+
+                {salaActual === 4 && (
+                    <div className="taberna-sala4-contenido">
+                        <NPCInterno id="skere" nombre="Martín Skerr" />
+                        <NPCInterno id="firitoz" nombre="Firitoz" />
+                    </div>
+                )}
             </div>
 
 
@@ -1482,6 +1458,22 @@ function Taberna({
             )}
 
 
+
+            {(salaActual === 2 || salaActual === 4) && (
+                <div className={`taberna-borde taberna-borde-escalera ${salaActual === 2 ? "taberna-borde-arriba" : "taberna-borde-abajo"}`}>
+                    <div className="taberna-borde-luz" />
+                    <button
+                        type="button"
+                        className="taberna-flecha taberna-flecha-vertical"
+                        onClick={salaActual === 2 ? subirEscalera : bajarEscalera}
+                        disabled={bloqueado}
+                        aria-label={salaActual === 2 ? "Subir a la Taberna 4" : "Bajar a la Taberna 2"}
+                        title={salaActual === 2 ? "Subir escalera" : "Bajar escalera"}
+                    >
+                        {salaActual === 2 ? "⌃" : "⌄"}
+                    </button>
+                </div>
+            )}
 
             <button
 

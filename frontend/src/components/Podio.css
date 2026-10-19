@@ -118,68 +118,47 @@
 
 
 /* =====================================================
-   CUARTO PUESTO
+   PUESTOS INFERIORES
+   Fila 1: 4, 5, 6, 7 (cuatro carteles)
+   Fila 2: 8, 9, 10, 11, 12 (cinco carteles)
+   Solo se dibujan los integrantes existentes.
+   Los tres primeros puestos no se modifican.
    ===================================================== */
 
-.podio-puesto-4 {
-    left: 57%;
-    top: 51%;
+.podio-puesto-inferior { z-index: 12; }
+/* La fila superior se dibuja sobre los nombres de la fila inferior. */
+.podio-puesto-inferior:nth-child(n+4):nth-child(-n+7) { z-index: 15; }
 
-    width: 20%;
-
-    z-index: 13;
-
-    transform: rotate(2deg);
+/* Cuatro carteles medianos, inclinados y relativamente juntos. */
+.podio-puesto-inferior:nth-child(4) {
+    left: 5%; top: 47%; width: 18%; transform: rotate(-7deg);
+}
+.podio-puesto-inferior:nth-child(5) {
+    left: 28%; top: 46%; width: 18%; transform: rotate(5deg);
+}
+.podio-puesto-inferior:nth-child(6) {
+    left: 51%; top: 48%; width: 17%; transform: rotate(-4deg);
+}
+.podio-puesto-inferior:nth-child(7) {
+    left: 73%; top: 47%; width: 16%; transform: rotate(6deg);
 }
 
-
-/* =====================================================
-   QUINTO PUESTO
-   ===================================================== */
-
-.podio-puesto-5 {
-    left: 5%;
-    top: 52%;
-
-    width: 20%;
-
-    z-index: 12;
-
-    transform: rotate(-2.5deg);
+/* Cinco carteles menores en la fila inferior, con giro irregular. */
+.podio-puesto-inferior:nth-child(8) {
+    left: 5%; top: 74%; width: 14%; transform: rotate(-6deg);
 }
-
-
-/* =====================================================
-   SEXTO PUESTO
-   ===================================================== */
-
-.podio-puesto-6 {
-    left: 29%;
-    top: 59%;
-
-    width: 19%;
-
-    z-index: 11;
-
-    transform: rotate(1.5deg);
+.podio-puesto-inferior:nth-child(9) {
+    left: 23%; top: 75%; width: 14%; transform: rotate(5deg);
 }
-
-
-/* =====================================================
-   SÉPTIMO PUESTO
-   ===================================================== */
-
-.podio-puesto-7 {
-    left: 79%;
-    top: 55%;
-
-    width: 18%;
-
-    z-index: 10;
-
-    transform: rotate(-3deg);
+.podio-puesto-inferior:nth-child(10) {
+    left: 41%; top: 74%; width: 14%; transform: rotate(-4deg);
 }
-
+.podio-puesto-inferior:nth-child(11) {
+    left: 59%; top: 75%; width: 14%; transform: rotate(7deg);
+}
+.podio-puesto-inferior:nth-child(12) {
+    left: 77%; top: 74%; width: 14%; transform: rotate(-5deg);
+}
 
 /* =====================================================
    POSTER
@@ -259,9 +238,9 @@
         serif;
 
     font-size: clamp(
-        12px,
-        1.15vw,
-        22px
+        13px,
+        1.35vw,
+        24px
     );
 
     font-weight: 900;
@@ -391,7 +370,7 @@
         0 5px 7px
         rgba(0, 0, 0, 0.6);
 
-    z-index: 9;
+    z-index: 1;
 }
 
 
@@ -470,3 +449,8 @@
         font-size: 10px;
     }
 }
+/* Prioridad visual: los puntos siempre por delante del nombre
+   cuando dos elementos de un mismo cartel se acercan. */
+.podio-puntos { z-index: 30; isolation: isolate; }
+.podio-nombre { z-index: 5; }
+.podio-puesto-1 .podio-corona { z-index: 1; }
