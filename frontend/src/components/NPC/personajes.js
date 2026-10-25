@@ -95,43 +95,7 @@ export const PERSONAJES = {
         ]
     },
 
-    lea: {
-        id: "lea",
-        nombre: "Lea",
-        rol: "Programador",
-        imagenTaberna: "/recursos/imagenes/personajes/lea1.webp",
-        imagenDialogo: "/recursos/imagenes/personajes/lea2.webp",
-        puntos: 0,
-        dialogos: [
-            "¿Qué?",
-            "Estoy ocupado.",
-            "Si hay algo que programar, déjamelo por ahí."
-        ],
-        archivos: [
-            { nombre: "Sistemas", tipo: "Programación" },
-            { nombre: "Mecánicas", tipo: "Código" },
-            { nombre: "Herramientas", tipo: "Programación" }
-        ]
-    },
 
-    hisoka: {
-        id: "hisoka",
-        nombre: "Hisoka",
-        rol: "Programador",
-        imagenTaberna: "/recursos/imagenes/personajes/hisoka1.webp",
-        imagenDialogo: "/recursos/imagenes/personajes/hisoka2.webp",
-        puntos: 0,
-        dialogos: [
-            "¿Qué mirai?",
-            "Estoy ocupado.",
-            "Si necesitai algo, habla rápido."
-        ],
-        archivos: [
-            { nombre: "Programación", tipo: "Código" },
-            { nombre: "Sistemas", tipo: "Programación" },
-            { nombre: "Proyectos", tipo: "Desarrollo" }
-        ]
-    },
     skere: {
         id: "skere",
         nombre: "Martín Skerr",
@@ -150,6 +114,26 @@ export const PERSONAJES = {
         imagenDialogo: "/recursos/imagenes/personajes/firitoz2.webp",
         puntos: 0,
         dialogos: ["¡Buenas!", "Estoy trabajando en el código del gremio."],
+        archivos: []
+    },
+    yurishin: {
+        id: "yurishin",
+        nombre: "Yurishin",
+        rol: "Dibujante",
+        imagenTaberna: "/recursos/imagenes/personajes/yurishin.webp",
+        imagenDialogo: "/recursos/imagenes/personajes/yurishin2.webp",
+        puntos: 0,
+        dialogos: ["¡Hola! Estoy preparando nuevas ilustraciones para el gremio."],
+        archivos: []
+    },
+    bentron: {
+        id: "bentron",
+        nombre: "Bentron",
+        rol: "Escritor",
+        imagenTaberna: "/recursos/imagenes/personajes/bentron.webp",
+        imagenDialogo: "/recursos/imagenes/personajes/bentron2.webp",
+        puntos: 0,
+        dialogos: ["Estoy trabajando en algunas historias para el gremio."],
         archivos: []
     }
 };

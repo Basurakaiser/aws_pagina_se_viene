@@ -59,8 +59,8 @@ body {
     --kano-ancho: 470px;
 
     /* WALALAN */
-    --walalan-x: 56%;
-    --walalan-y: 46%;
+    --walalan-x: 51%;
+    --walalan-y: 47%;
     --walalan-ancho: 230px;
 
     /* HISOKA */
@@ -1668,3 +1668,32 @@ body {
 @keyframes taberna-entrar-arriba { from {transform:translateY(55px);opacity:0} to {transform:translateY(0);opacity:1} }
 @keyframes taberna-salir-abajo { from {transform:translateY(0);opacity:1} to {transform:translateY(-55px);opacity:0} }
 @keyframes taberna-entrar-abajo { from {transform:translateY(-55px);opacity:0} to {transform:translateY(0);opacity:1} }
+
+
+/* Yurishin: sala 1, a la izquierda de Kaiser. */
+.taberna-npc-yurishin {
+    left: 3%;
+    top: 40%;
+    width: clamp(150px, 16vw, 300px);
+    z-index: 8;
+}
+
+/* Bentron: sala 2, hamster pequeno a la derecha de Walalan. */
+.taberna-npc-bentron {
+    left: 64%;
+    top: 53%;
+    width: clamp(65px, 8vw, 145px);
+    z-index: 9;
+}
+
+/* El aventurero ve su propia figura semitransparente, sin interaccion. */
+.taberna-npc-propio {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.taberna-npc-propio .taberna-npc-interaccion { display: none; }
+
+@media (max-width: 1250px) {
+    .taberna-npc-yurishin { width: 16vw; }
+    .taberna-npc-bentron { width: 8vw; }
+}
