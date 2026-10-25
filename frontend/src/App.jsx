@@ -19,10 +19,10 @@ const USUARIOS_TABERNA = [
     "ruoye",
     "vicho",
     "walalan",
-    "lea",
-    "hisoka",
     "skere",
     "firitoz",
+    "yurishin",
+    "bentron",
 ];
 function App() {
 

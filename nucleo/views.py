@@ -136,6 +136,8 @@ ROLES_POR_USUARIO = {
     'walalan': 'escritor',
     'skere': 'programador',
     'firitoz': 'programador',
+    'yurishin': 'dibujante',
+    'bentron': 'escritor',
 }
 
 
@@ -293,7 +295,7 @@ def tomar_mision(
     usuarios_validos = {
         valor
         for valor, _ in Mision.MIEMBROS_CHOICES
-        if valor != 'todos'
+        if valor not in ('todos', 'lea', 'hisoka')
     }
 
     if usuario not in usuarios_validos:
@@ -588,7 +590,7 @@ def ranking_miembros(request):
     ranking = []
 
     for valor, nombre in Mision.MIEMBROS_CHOICES:
-        if valor == 'todos':
+        if valor in ('todos', 'lea', 'hisoka'):
             continue
 
         misiones = (

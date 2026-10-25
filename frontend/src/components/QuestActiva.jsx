@@ -12,13 +12,15 @@ import { misionesApi } from "../api/client";
 
 const INVOCADORES = {
     kaiser: "programador",
-    lea: "programador",
-    hisoka: "programador",
 
     ruoye: "dibujante",
     walalan: "escritor",
     vicho: "hibrido",
     kano: "musico",
+    skere: "programador",
+    firitoz: "programador",
+    yurishin: "dibujante",
+    bentron: "escritor",
 };
 
 function obtenerInvocador(usuario) {

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./Entrada.css";
 
-const USUARIOS_TABERNA = ["kaiser", "kano", "ruoye", "vicho", "walalan", "lea", "hisoka"];
+const USUARIOS_TABERNA = ["kaiser", "kano", "ruoye", "vicho", "walalan", "skere", "firitoz", "yurishin", "bentron"];
 const IMAGEN_CERRADA = "/recursos/imagenes/entrada_cerrada.png";
 const IMAGEN_ABIERTA = "/recursos/imagenes/entrada_abierta.png";
 

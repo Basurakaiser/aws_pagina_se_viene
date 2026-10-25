@@ -3,29 +3,29 @@ import "./Podio.css";
 import { proyectoApi } from "../api/client";
 
 const IMAGENES = {
-    hisoka: "/recursos/imagenes/podio/hisoka.png",
     kaiser: "/recursos/imagenes/podio/kaiser.png",
     kano: "/recursos/imagenes/podio/kano.png",
-    lea: "/recursos/imagenes/podio/lea.png",
     ruoye: "/recursos/imagenes/podio/ruoye.png",
     vicho: "/recursos/imagenes/podio/vicho.png",
     vichosky: "/recursos/imagenes/podio/vicho.png",
     walalan: "/recursos/imagenes/podio/walalan.png",
     skere: "/recursos/imagenes/podio/skere.png",
-    firitoz: "/recursos/imagenes/podio/firitoz.png"
+    firitoz: "/recursos/imagenes/podio/firitoz.png",
+    yurishin: "/recursos/imagenes/podio/yurishin.png",
+    bentron: "/recursos/imagenes/podio/bentron.png"
 };
 
 const NOMBRES = {
-    hisoka: "Hisoka",
     kaiser: "Kaiser",
     kano: "Kano",
-    lea: "Lea",
     ruoye: "Ruoye",
     vicho: "Vichosky",
     vichosky: "Vichosky",
     walalan: "Walalan",
     skere: "Skere",
-    firitoz: "Firitoz"
+    firitoz: "Firitoz",
+    yurishin: "Yurishin",
+    bentron: "Bentron"
 };
 
 const ORDEN_FALLBACK = [
@@ -34,10 +34,10 @@ const ORDEN_FALLBACK = [
     "kano",
     "walalan",
     "vicho",
-    "hisoka",
-    "lea",
     "skere",
-    "firitoz"
+    "firitoz",
+    "yurishin",
+    "bentron"
 ];
 
 function Podio() {
@@ -93,7 +93,7 @@ function Podio() {
                 .trim()
                 .toLowerCase();
 
-            if (!id) return;
+            if (!id || !ORDEN_FALLBACK.includes(id === "vichosky" ? "vicho" : id)) return;
 
             const idCanonico = id === "vichosky" ? "vicho" : id;
             mapaRanking.set(idCanonico, persona);
@@ -127,7 +127,7 @@ function Podio() {
                 .trim()
                 .toLowerCase();
 
-            if (!idOriginal) return;
+            if (!idOriginal || !ORDEN_FALLBACK.includes(idOriginal === "vichosky" ? "vicho" : idOriginal)) return;
 
             const id =
                 idOriginal === "vichosky"

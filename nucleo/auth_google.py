@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from google.auth.transport import requests as google_requests
 from google.oauth2 import id_token
 
-AVENTUREROS = {"kaiser", "kano", "ruoye", "vicho", "walalan", "lea", "hisoka", "skere", "firitoz"}
+AVENTUREROS = {"kaiser", "kano", "ruoye", "vicho", "walalan", "skere", "firitoz", "yurishin", "bentron"}
 
 @csrf_exempt  # Solo este endpoint: verifica el ID token firmado de Google antes de emitir un token propio.
 @require_POST

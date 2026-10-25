@@ -27,8 +27,10 @@ const PERSONAJES = {
     ruoye: { nombre: "Ruoye", rol: "Dibujante", imagen: "/recursos/imagenes/personajes/ruoye1.webp" },
     vicho: { nombre: "Vicho", rol: "Híbrido", imagen: "/recursos/imagenes/personajes/vicho1.webp" },
     walalan: { nombre: "Walalan", rol: "Escritor", imagen: "/recursos/imagenes/personajes/walalan1.webp" },
-    lea: { nombre: "Lea", rol: "Programador", imagen: "/recursos/imagenes/personajes/lea1.webp" },
-    hisoka: { nombre: "Hisoka", rol: "Programador", imagen: "/recursos/imagenes/personajes/hisoka1.webp" },
+    skere: { nombre: "Martín Skerr", rol: "Programador", imagen: "/recursos/imagenes/personajes/skere1.webp" },
+    firitoz: { nombre: "Firitoz", rol: "Programador", imagen: "/recursos/imagenes/personajes/firitoz1.webp" },
+    yurishin: { nombre: "Yurishin", rol: "Dibujante", imagen: "/recursos/imagenes/personajes/yurishin.webp" },
+    bentron: { nombre: "Bentron", rol: "Escritor", imagen: "/recursos/imagenes/personajes/bentron.webp" },
 };
 
 function crearOpcionVacia() {

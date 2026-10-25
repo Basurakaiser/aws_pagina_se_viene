@@ -113,18 +113,16 @@ function Taberna({
             "/recursos/imagenes/taberna4.png",
             "/recursos/imagenes/personajes/skere1.webp",
             "/recursos/imagenes/personajes/firitoz1.webp",
+            "/recursos/imagenes/personajes/yurishin.webp",
+            "/recursos/imagenes/personajes/bentron.webp",
+            "/recursos/imagenes/podio/yurishin.png",
+            "/recursos/imagenes/podio/bentron.png",
 
             "/recursos/imagenes/papeldash.png",
-
-
-
-            "/recursos/imagenes/podio/hisoka.png",
 
             "/recursos/imagenes/podio/kaiser.png",
 
             "/recursos/imagenes/podio/kano.png",
-
-            "/recursos/imagenes/podio/lea.png",
 
             "/recursos/imagenes/podio/ruoye.png",
 
@@ -346,7 +344,7 @@ function Taberna({
 
             "/recursos/imagenes/runa2.png",
 
-            `/recursos/imagenes/invocador/${({ kaiser: "programador", lea: "programador", hisoka: "programador", ruoye: "dibujante", walalan: "escritor", vicho: "hibrido", kano: "musico" })[usuarioActual] || "programador"}.png`
+            `/recursos/imagenes/invocador/${({ kaiser: "programador", ruoye: "dibujante", walalan: "escritor", vicho: "hibrido", kano: "musico", skere: "programador", firitoz: "programador", yurishin: "dibujante", bentron: "escritor" })[usuarioActual] || "programador"}.png`
 
         ];
 
@@ -1075,13 +1073,13 @@ function Taberna({
 
         nombre
 
-    }) => id === usuarioActual ? null : (
+    }) => (
 
         <div
 
             className={
 
-                `taberna-npc taberna-npc-${id}`
+                `taberna-npc taberna-npc-${id}${id === usuarioActual ? " taberna-npc-propio" : ""}`
 
             }
 
@@ -1097,7 +1095,9 @@ function Taberna({
 
                 src={
 
-                    `/recursos/imagenes/personajes/${id}1.webp`
+                    id === "yurishin" || id === "bentron"
+                        ? `/recursos/imagenes/personajes/${id}.webp`
+                        : `/recursos/imagenes/personajes/${id}1.webp`
 
                 }
 
@@ -1137,7 +1137,7 @@ function Taberna({
 
                     }
 
-                    disabled={bloqueado}
+                    disabled={bloqueado || id === usuarioActual}
 
                 >
 
@@ -1224,16 +1224,7 @@ function Taberna({
                             nombre="Ruoye"
 
                         />
-
-
-
-                        <NPCInterno
-
-                            id="lea"
-
-                            nombre="Lea"
-
-                        />
+                        <NPCInterno id="yurishin" nombre="Yurishin" />
 
 
 
@@ -1311,14 +1302,6 @@ function Taberna({
 
                     <div className="taberna-sala2-contenido">
 
-                        <NPCInterno
-
-                            id="hisoka"
-
-                            nombre="Hisoka"
-
-                        />
-
 
 
                         <NPCInterno
@@ -1338,6 +1321,7 @@ function Taberna({
                             nombre="Walalan"
 
                         />
+                        <NPCInterno id="bentron" nombre="Bentron" />
 
 
 

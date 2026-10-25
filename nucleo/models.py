@@ -236,6 +236,8 @@ class Mision(models.Model):
         ('hisoka', 'Hisoka'),
         ('skere', 'Skere'),
         ('firitoz', 'Firitoz'),
+        ('yurishin', 'Yurishin'),
+        ('bentron', 'Bentron'),
         ('todos', 'Todos / Libre'),
     ]
 
@@ -528,6 +530,8 @@ class Publicacion(models.Model):
         ('hisoka', 'Hisoka'),
         ('skere', 'Skere'),
         ('firitoz', 'Firitoz'),
+        ('yurishin', 'Yurishin'),
+        ('bentron', 'Bentron'),
     ]
 
     autor = models.CharField(
