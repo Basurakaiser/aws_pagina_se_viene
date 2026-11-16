@@ -1,5 +1,4 @@
 import os
-import json
 """
 Django settings for mi_api project.
 
@@ -60,6 +59,7 @@ INSTALLED_APPS = [
     # ¡AGREGA ESTAS DOS LÍNEAS AQUÍ ABAJO!
     'corsheaders',  # <-- ¡AÑADE ESTA LÍNEA!
     'rest_framework',
+    'rest_framework.authtoken',
     'nucleo',
 ]
 
@@ -152,8 +152,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOCAL_FRONTEND_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]
 EXTRA_FRONTEND_ORIGINS = [origin.strip() for origin in os.environ.get("DJANGO_FRONTEND_ORIGINS", "").split(",") if origin.strip()]
 CSRF_TRUSTED_ORIGINS = LOCAL_FRONTEND_ORIGINS + EXTRA_FRONTEND_ORIGINS
-# Google Login: no pegar credenciales privadas en este archivo.
-GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
-# JSON ejemplo: {"correo@gmail.com":"kaiser"}; la cuenta debe estar verificada por Google.
-GOOGLE_AVENTUREROS = json.loads(os.environ.get("GOOGLE_AVENTUREROS", "{}"))
 CORS_ALLOWED_ORIGINS = LOCAL_FRONTEND_ORIGINS + EXTRA_FRONTEND_ORIGINS
+
+
+# Autenticación mediante token Bearer, compatible con el frontend existente.
+# DRF responde 401 ante tokens ausentes/incorrectos y JSON en sus respuestas.
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "nucleo.authentication.BearerTokenAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
+}

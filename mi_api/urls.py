@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from nucleo import views
-from nucleo.auth_google import login_google, perfil_google
+from nucleo.auth_password import login_usuario, perfil_usuario, logout_usuario
 
 
 router = DefaultRouter()
@@ -21,8 +21,9 @@ router.register(
 
 
 urlpatterns = [
-    path("api/auth/google/", login_google, name="login_google"),
-    path("api/auth/me/", perfil_google, name="perfil_google"),
+    path("api/auth/login/", login_usuario, name="login_usuario"),
+    path("api/auth/me/", perfil_usuario, name="perfil_usuario"),
+    path("api/auth/logout/", logout_usuario, name="logout_usuario"),
     # ==================================================
     # ADMIN
     # ==================================================
