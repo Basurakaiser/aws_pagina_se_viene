@@ -791,30 +791,18 @@ function Taberna({
 
 
     const volverInicio = () => {
+        // Volver a la primera sala sin abandonar la sesión.
+        // Reutiliza el cambio de sala existente para conservar la animación.
+        if (bloqueado || salaActual === 1) return;
 
-        if (bloqueado) {
+        const direccion = salaActual === 3
+            ? "derecha"
+            : salaActual === 4
+                ? "abajo"
+                : "izquierda";
 
-            return;
-
-        }
-
-
-
-        resetearCamara();
-
-
-
-        setSaliendo(true);
-
-
-
-        setTimeout(() => {
-
-            cambiarPantalla("entrada");
-
-        }, 850);
-
-    };
+        cambiarSala(1, direccion);
+    };
 
 
 

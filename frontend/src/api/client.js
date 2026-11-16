@@ -1,6 +1,5 @@
-
 // ==================================================
-// CONFIGURACIÓN DE LA API
+// API + AUTENTICACIÓN DJANGO (TOKEN BEARER)
 // ==================================================
 
 const BASE_URL = `${
@@ -8,116 +7,84 @@ const BASE_URL = `${
         .replace(/\/$/, "")
 }/api`;
 
+const CLAVE_TOKEN = "taberna_token";
+const EVENTO_SESION_VENCIDA = "taberna:sesion-vencida";
 
-// ==================================================
-// CSRF
-// ==================================================
-
-function obtenerCookie(nombre) {
-    const cookies = document.cookie
-        ? document.cookie.split(";")
-        : [];
-
-    for (const cookie of cookies) {
-        const cookieLimpia = cookie.trim();
-
-        if (cookieLimpia.startsWith(`${nombre}=`)) {
-            return decodeURIComponent(
-                cookieLimpia.substring(nombre.length + 1)
-            );
-        }
-    }
-
-    return null;
+function limpiarSesionLocal() {
+    sessionStorage.removeItem(CLAVE_TOKEN);
+    // Limpiar el valor antiguo de la versión con selector de personajes.
+    localStorage.removeItem("taberna_usuario");
 }
 
-function obtenerCsrfToken() {
-    return obtenerCookie("csrftoken");
-}
-
-
-// ==================================================
-// PETICIONES AUTENTICADAS
-// ==================================================
-
-async function request(url, options = {}) {
-    const metodo = (options.method || "GET").toUpperCase();
-
-    const necesitaCsrf = ![
-        "GET",
-        "HEAD",
-        "OPTIONS",
-        "TRACE"
-    ].includes(metodo);
-
-    const token = sessionStorage.getItem("taberna_token");
-
-    if (!token) {
-        throw new Error(
-            "Debes iniciar sesión con Google para continuar."
+function errorDeRespuesta(datos, codigo) {
+    if (typeof datos?.error === "string") return datos.error;
+    if (typeof datos?.detail === "string") return datos.detail;
+    if (datos && typeof datos === "object") {
+        const detalles = Object.entries(datos).map(([campo, valor]) =>
+            `${campo}: ${Array.isArray(valor) ? valor.join(", ") : String(valor)}`
         );
+        if (detalles.length) return detalles.join(" | ");
+    }
+    return `Error del servidor: ${codigo}`;
+}
+
+async function request(url, options = {}, autenticada = true) {
+    const token = sessionStorage.getItem(CLAVE_TOKEN);
+    if (autenticada && !token) {
+        throw new Error("Debes iniciar sesión para continuar.");
     }
 
     const headers = {
         "Content-Type": "application/json",
         ...options.headers,
-        Authorization: `Bearer ${token}`
     };
+    if (autenticada) headers.Authorization = `Bearer ${token}`;
 
-    if (necesitaCsrf) {
-        const csrfToken = obtenerCsrfToken();
-
-        if (csrfToken) {
-            headers["X-CSRFToken"] = csrfToken;
-        }
-    }
-
+    // No usamos cookies de sesión: Django valida el token en Authorization.
     const respuesta = await fetch(`${BASE_URL}${url}`, {
         ...options,
         headers,
-        credentials: "same-origin"
+        credentials: "omit",
     });
 
-    if (respuesta.status === 401) {
-        sessionStorage.removeItem("taberna_token");
-
-        throw new Error(
-            "Tu sesión venció. Recarga la página e inicia sesión con Google nuevamente."
-        );
-    }
-
-    if (respuesta.status === 204) {
-        return null;
-    }
-
-    let datos = null;
-
-    try {
-        datos = await respuesta.json();
-    } catch {
-        datos = null;
-    }
+    const datos = respuesta.status === 204
+        ? null
+        : await respuesta.json().catch(() => null);
 
     if (!respuesta.ok) {
-        const mensaje =
-            datos?.error ||
-            datos?.detail ||
-            datos ||
-            `Error del servidor: ${respuesta.status}`;
-
-        throw new Error(
-            typeof mensaje === "string"
-                ? mensaje
-                : JSON.stringify(mensaje)
-        );
+        if (autenticada && respuesta.status === 401) {
+            limpiarSesionLocal();
+            window.dispatchEvent(new Event(EVENTO_SESION_VENCIDA));
+        }
+        throw new Error(errorDeRespuesta(datos, respuesta.status));
     }
-
     return datos;
 }
 
+// El login es la única petición que NO necesita un token previo.
+export const authApi = {
+    hayToken: () => Boolean(sessionStorage.getItem(CLAVE_TOKEN)),
 
+    iniciar: async (usuario, password) => {
+        const datos = await request("/auth/login/", {
+            method: "POST",
+            body: JSON.stringify({ usuario, password }),
+        }, false);
+        if (!datos?.token || typeof datos?.aventurero !== "string") {
+            throw new Error("La respuesta de autenticación no es válida.");
+        }
+        sessionStorage.setItem(CLAVE_TOKEN, datos.token);
+        return datos;
+    },
 
- // ==================================================
+    perfil: () => request("/auth/me/"),
+
+    cerrar: () => request("/auth/logout/", { method: "POST" }),
+
+    limpiarLocal: limpiarSesionLocal,
+};
+
+// ==================================================
  // DASHBOARD Y RANKING
  // ==================================================
 

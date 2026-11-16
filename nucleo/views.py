@@ -3,7 +3,8 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Sum
 from django.db import transaction
 from rest_framework.exceptions import PermissionDenied, NotAuthenticated
-from .auth_google import obtener_aventurero_autenticado
+from rest_framework.permissions import IsAuthenticated
+from .auth_password import AVENTUREROS, BearerTokenAuthentication
 
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
@@ -28,12 +29,15 @@ from .serializers import (
 )
 
 
-# Autorización basada en el token firmado por Django tras verificar Google.
-# No se acepta localStorage, parámetros de URL ni el cuerpo como identidad.
+# La identidad proviene del usuario que DRF autenticó con el token Bearer.
+# Jamás se confía en el nombre recibido desde localStorage ni desde el cuerpo.
 def aventurero_actual(request):
-    nombre = obtener_aventurero_autenticado(request)
-    if not nombre:
-        raise NotAuthenticated('Inicia sesión con Google para continuar.')
+    usuario = getattr(request, "user", None)
+    if not usuario or not usuario.is_authenticated:
+        raise NotAuthenticated("Debes iniciar sesión para continuar.")
+    nombre = usuario.get_username().strip().lower()
+    if nombre not in AVENTUREROS:
+        raise PermissionDenied("Esta cuenta no pertenece al gremio.")
     return nombre
 
 
@@ -650,8 +654,8 @@ class PublicacionViewSet(
         PublicacionSerializer
     )
 
-    authentication_classes = []
-    permission_classes = []
+    authentication_classes = [BearerTokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def initial(self, request, *args, **kwargs):
         super().initial(request, *args, **kwargs)
@@ -724,8 +728,8 @@ class OpcionDialogoViewSet(
         OpcionDialogoCrearSerializer
     )
 
-    authentication_classes = []
-    permission_classes = []
+    authentication_classes = [BearerTokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def initial(self, request, *args, **kwargs):
         super().initial(request, *args, **kwargs)

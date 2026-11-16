@@ -248,3 +248,33 @@
     --entrada-zoom: 1.13;
     --entrada-duracion-total: 1.15s;
 }
+
+
+/* LOGIN LOCAL: mantiene la apariencia medieval de la entrada. */
+.entrada-formulario-login {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 9px;
+}
+.entrada-formulario-login label {
+    font: bold 14px Georgia, serif;
+    color: #e9c779;
+}
+.entrada-formulario-login input {
+    width: 100%;
+    padding: 11px 13px;
+    box-sizing: border-box;
+    border: 1px solid #8f6b3c;
+    border-radius: 5px;
+    background: #1b130e;
+    color: #fff0d1;
+    font: 16px Georgia, serif;
+}
+.entrada-formulario-login input:focus-visible {
+    outline: 2px solid #f4ca7a;
+    outline-offset: 1px;
+}
+.entrada-formulario-login button { margin-top: 10px; }
+.entrada-formulario-login button:disabled { opacity: .6; cursor: wait; }
+.entrada-login-error { color: #ffb3a4 !important; margin: 4px 0 !important; }
